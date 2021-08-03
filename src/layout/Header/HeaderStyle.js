@@ -2,18 +2,23 @@ import styled from "styled-components";
 
 export const WraperHeader = styled.header`
   height: 9rem;
-
   background-size: cover;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .logo {
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
-      rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    img {
-      width: 10rem;
-      margin-left: 1rem;
+
+  .user {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    &__avt {
+      width: 4.75rem;
+      border-radius: 50%;
+    }
+    &__user-name {
+      font-size: 1.6rem;
+      color: var(--color-light);
+      padding-left: 1rem;
     }
   }
 
@@ -28,6 +33,7 @@ export const WraperHeader = styled.header`
     display: flex;
     margin-right: 2rem;
     color: #333;
+
     &__icon {
       position: relative;
       display: flex;

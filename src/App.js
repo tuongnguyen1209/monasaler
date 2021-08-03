@@ -8,10 +8,10 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 function App() {
   return (
     <Container>
-      {/* <Header />
+      <Header />
       <Content />
-      <Footer /> */}
-      <LoginPage />
+      <Footer />
+      {/* <LoginPage /> */}
     </Container>
   );
 }

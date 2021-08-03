@@ -1,15 +1,16 @@
 import React from "react";
 import { WraperHeader } from "./HeaderStyle";
-import logo from "../../assets/img/logo-paint.png";
+import avt from "../../assets/img/noAvt.png";
 
 const Header = () => {
   return (
     <WraperHeader>
-      <div className="logo">
-        <img src={logo} alt="logo" />
+      <div className="user">
+        <img src={avt} alt="User avt" className="user__avt" />
+        <span className="user__user-name">Nguyễn Văn A</span>
       </div>
       <div className="box-center">
-        <p className="box-center__text">Xin chào, Nguyễn Văn A! </p>
+        <p className="box-center__text">Mona Paint, xin chào! </p>
       </div>
       <div className="box-right">
         <div className="box-right__icon">
