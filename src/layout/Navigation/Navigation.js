@@ -25,6 +25,7 @@ const Navigation = () => {
         <i className="fas fa-file-invoice-dollar icon"></i>
         <span className="icon-box__name">Hóa đơn</span>
       </div>
+      <p>test</p>
     </WraperNav>
   );
 };
