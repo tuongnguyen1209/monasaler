@@ -1,3 +1,10 @@
+:root {
+  --color-primary: #ff3366;
+  --color-primary-2: #ba265d;
+
+  --color-light: #ffffff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,4 +23,11 @@ html {
 
 body {
   font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary-2),
+    var(--color-primary)
+  );
 }
