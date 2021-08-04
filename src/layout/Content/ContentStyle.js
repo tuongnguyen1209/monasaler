@@ -1,13 +1,41 @@
 import styled from "styled-components";
 export const WraperContent = styled.div`
   background-color: var(--color-light);
-  height: 83rem;
-  border-top-left-radius: 5rem;
-  border-top-right-radius: 5rem;
+  color: var(--color-light);
+  /* border-top-left-radius: 5rem;
+  border-top-right-radius: 5rem; */
+  padding: 1rem 1rem;
   margin: 0.3rem auto;
-  display: flex;
-  justify-content: center;
-  .search {
+  height: 100%;
+
+  box-shadow: var(--shadow-dark);
+
+  .scan {
+    display: flex;
+    margin: 5rem 2rem;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 3rem;
+    border-radius: 2rem;
+    background-image: linear-gradient(
+      to right,
+      var(--color-primary-2),
+      var(--color-primary)
+    );
+    background-size: cover;
+    &__img {
+      fill: var(--color-light);
+      width: 10rem;
+      height: 10rem;
+    }
+    &__text {
+      text-transform: uppercase;
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+  }
+
+  /* .search {
     padding-top: 1rem;
     width: 50%;
 
@@ -43,6 +71,6 @@ export const WraperContent = styled.div`
     &__icon {
       color: #ccc;
       font-size: 1.8rem;
-    }
-  }
+    } 
+  }*/
 `;

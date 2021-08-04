@@ -1,18 +1,15 @@
 import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "./AppStyle";
-import Content from "./layout/Content/Content";
-import Footer from "./layout/Navigation/Navigation";
-import Header from "./layout/Header/Header";
-import LoginPage from "./pages/LoginPage/LoginPage";
+import RouterSales from "./RouterSales";
 
 function App() {
   return (
-    <Container>
-      <Header />
-      <Content />
-      <Footer />
-      {/* <LoginPage /> */}
-    </Container>
+    <BrowserRouter>
+      <Container>
+        <Route path="/" component={RouterSales} strict />
+      </Container>
+    </BrowserRouter>
   );
 }
 
