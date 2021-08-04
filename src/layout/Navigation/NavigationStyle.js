@@ -59,4 +59,7 @@ export const WraperNav = styled.nav`
   & > *:hover {
     background-color: var(--color-grey-light-4);
   }
+  @media screen and (min-width: 1025px) {
+    max-width: 90rem;
+  }
 `;

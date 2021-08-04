@@ -1,7 +1,17 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  /* max-width: 90rem; */
   margin: 0 auto;
   min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 1025px) {
+    max-width: 90rem;
+  }
+`;
+
+export const WrapContent = styled.div`
+  flex: 1;
+  background-color: white;
 `;
