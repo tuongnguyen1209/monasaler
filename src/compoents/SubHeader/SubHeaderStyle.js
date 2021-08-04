@@ -10,7 +10,7 @@ export const Wrapersub = styled.div`
     }
 
     &__box {
-      flex: 0 0 30%;
+      flex: 0 0 35%;
       margin-right: -2rem;
       border-bottom-left-radius: 1rem;
       background-image: linear-gradient(
