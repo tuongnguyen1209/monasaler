@@ -4,10 +4,21 @@ export const WraperNav = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  height: 10vh;
+  box-shadow: var(--shadow-dark);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  a:link,
+  a:active {
+    text-decoration: none;
+    color: var(--color-light);
+  }
   .logo-box {
+    display: flex;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+
     img {
       height: 6rem;
     }
@@ -17,13 +28,24 @@ export const WraperNav = styled.nav`
     flex-direction: column;
     align-items: center;
     align-self: stretch;
+    justify-content: center;
     padding: 1rem;
+    position: relative;
     &__name {
       padding-top: 1rem;
       text-transform: uppercase;
       font-weight: 500;
       font-size: 1.8rem;
       font-family: inherit;
+      color: var(--color-grey-dark-1);
+    }
+    &.active::after {
+      content: "";
+      background-color: red;
+      width: 100%;
+      height: 3px;
+      position: absolute;
+      bottom: 0;
     }
   }
   .icon {
@@ -35,6 +57,6 @@ export const WraperNav = styled.nav`
   }
 
   & > *:hover {
-    background-color: #ccc;
+    background-color: var(--color-grey-light-4);
   }
 `;
