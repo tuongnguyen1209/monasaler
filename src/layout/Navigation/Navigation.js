@@ -35,7 +35,7 @@ const Navigation = () => {
         Khách hàng
       </NavLink>
       <NavLink to="/hoa-don" class="fas fa-receipt ">
-        Hóa đơn
+        Đơn hàng
       </NavLink>
       <NavLink to="/thong-ke" class="fas fa-file-invoice-dollar">
         Thống kê
