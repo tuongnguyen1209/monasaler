@@ -13,5 +13,6 @@ export const Container = styled.div`
 
 export const WrapContent = styled.div`
   flex: 1;
+  padding-bottom: 10%;
   background-color: white;
 `;

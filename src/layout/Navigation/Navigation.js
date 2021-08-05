@@ -11,7 +11,7 @@ const Navigation = () => {
       <Link to={props.to}>
         <div
           className={`icon-box ${
-            location.pathname === props.to ? "active" : ""
+            location.pathname.indexOf(props.to) !== -1 ? "active" : ""
           }`}
         >
           <i className={`${props.class} icon`}></i>
