@@ -46,7 +46,7 @@ export const WrapCamera = styled.div`
       position: relative;
       .line {
         width: 85%;
-        height: 1px;
+        height: 0.5rem;
         background-color: red;
         position: absolute;
         left: 50%;
