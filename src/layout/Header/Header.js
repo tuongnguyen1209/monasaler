@@ -7,10 +7,10 @@ const Header = () => {
     <WraperHeader>
       <div className="user">
         <img src={avt} alt="User avt" className="user__avt" />
-        <span className="user__user-name">Nguyễn Văn A</span>
+        <span className="user__user-name">Xin Chào, Nguyễn Văn A</span>
       </div>
       <div className="box-center">
-        <p className="box-center__text">Mona Paint, xin chào! </p>
+        {/* <p className="box-center__text">Mona Paint, xin chào! </p> */}
       </div>
       <div className="box-right">
         <div className="box-right__icon">

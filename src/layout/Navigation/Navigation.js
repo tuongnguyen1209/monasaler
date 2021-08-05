@@ -1,19 +1,24 @@
 import React from "react";
-import { WraperNav } from "./NavigationStyle";
-import logo from "../../assets/img/logo-paint.png";
 import { Link, useLocation } from "react-router-dom";
+import { WraperNav } from "./NavigationStyle";
 
 const Navigation = () => {
   const location = useLocation();
 
+  const check = (to) => {
+    const path = location.pathname;
+
+    if (to !== "/") {
+      return path.indexOf(to) !== -1;
+    } else {
+      return path === to;
+    }
+  };
+
   const NavLink = (props) => {
     return (
       <Link to={props.to}>
-        <div
-          className={`icon-box ${
-            location.pathname.indexOf(props.to) !== -1 ? "active" : ""
-          }`}
-        >
+        <div className={`icon-box ${check(props.to) ? "active" : ""}`}>
           <i className={`${props.class} icon`}></i>
           <span className="icon-box__name">{props.children}</span>
         </div>
@@ -22,11 +27,9 @@ const Navigation = () => {
   };
   return (
     <WraperNav>
-      <Link to="/">
-        <div className="logo-box">
-          <img src={logo} alt=" Logo" />
-        </div>
-      </Link>
+      <NavLink to="/" class="fas fa-home">
+        Trang chủ
+      </NavLink>
       <NavLink to="/san-pham" class="fas fa-list-alt">
         Sản phẩm
       </NavLink>

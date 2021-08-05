@@ -13,16 +13,7 @@ export const WraperNav = styled.nav`
     text-decoration: none;
     color: var(--color-light);
   }
-  .logo-box {
-    display: flex;
-    align-self: stretch;
-    justify-content: center;
-    align-items: center;
 
-    img {
-      height: 6rem;
-    }
-  }
   .icon-box {
     display: flex;
     flex-direction: column;
@@ -61,5 +52,23 @@ export const WraperNav = styled.nav`
   }
   @media screen and (min-width: 1025px) {
     max-width: 90rem;
+  }
+  @media screen and (max-width: 766px) {
+    .logo-box {
+      img {
+        height: 6rem;
+        &.logomini {
+          display: block;
+        }
+        &.logo {
+          display: none;
+        }
+      }
+    }
+    .icon-box {
+      &__name {
+        font-size: 0.8rem;
+      }
+    }
   }
 `;
