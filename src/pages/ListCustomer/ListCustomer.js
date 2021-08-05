@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../../compoents/Button/Button";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import { WraperListCustomer } from "./ListCustomerStyle";
 
@@ -81,6 +82,9 @@ const ListCustomer = () => {
             <p className="customer__phone">ĐT: 0909777999</p>
           </div>
         </div>
+      </div>
+      <div className="btn-box">
+        <Button>Thêm Khách Hàng</Button>
       </div>
     </WraperListCustomer>
   );

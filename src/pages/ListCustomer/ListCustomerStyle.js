@@ -76,6 +76,9 @@ export const WraperListCustomer = styled.div`
       font-size: 1.8rem;
     }
   }
+  .btn-box {
+    text-align: center;
+  }
   @media screen and (max-width: 767px) {
     .customer {
       width: 100%;

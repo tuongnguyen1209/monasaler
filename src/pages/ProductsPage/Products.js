@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Switch,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 import PaintType from "../../compoents/PaintType/PaintType";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import { WraperProduct } from "./ProductsStyle";
+import ImgProduct from "../../assets/img/matex_sealer.jpg";
 
 const Products = () => {
   const dataKindOFPaint = [
@@ -53,17 +60,22 @@ const Products = () => {
     loaicha: "",
     loaicon: "",
   });
+  const [show, setShow] = useState(true);
   const [title, setTitle] = useState("Sản phẩm");
   const fillterArr = (arr = [], types = "") => {
     return arr.filter((el) => el.role === types);
   };
-
   const changeType = (loai, tenLoai) => {
     const newCurrentType = { ...currentTypes };
     newCurrentType[tenLoai] = loai;
     setCurrentTypes(newCurrentType);
   };
-
+  const onShow = () => {
+    if (!currentTypes.loaicon) {
+      setShow(!show);
+    }
+    console.log(currentTypes);
+  };
   const paintType1 = fillterArr(dataKindOFPaint, "Loại cha").map(
     (type, index) => {
       return (
@@ -90,6 +102,7 @@ const Products = () => {
           }}
         >
           <PaintType
+            onShow={onShow}
             linkTo={`${match1.path}/${currentTypes.loaicha}/${type.name}`}
           >
             {type.name}
@@ -103,7 +116,9 @@ const Products = () => {
     <WraperProduct>
       <SubHeader>{title}</SubHeader>
       <div className="body">
-        <h1 className="body__text">Tra cứu sản phẩm</h1>
+        <h1 className={`body__text ${show ? "" : "text-hidden"}`}>
+          Tra cứu sản phẩm
+        </h1>
         <Switch>
           <Route
             exact
@@ -131,9 +146,36 @@ const Products = () => {
               setTitle(cate2);
               return (
                 <>
-                  <p>san pham</p>
-                  <p>{cate1}</p>
-                  <p>{cate2}</p>
+                  <form className="search">
+                    <input
+                      type="text"
+                      className="search__input"
+                      placeholder="Tìm kiếm...."
+                    />
+                    <button className="search__button">
+                      <i className="fas fa-search search__icon"></i>
+                    </button>
+                  </form>
+                  <div className="product-list">
+                    <Link to="/chi-tiet-san-pham/:id">
+                      <div className="product">
+                        <div className="product__img">
+                          <img src={ImgProduct} />
+                        </div>
+                        <div className="product__name">
+                          <span>Sơn Lót Nội Thất Matex Sealer</span>
+                        </div>
+                      </div>
+                    </Link>
+                    <div className="product">
+                      <div className="product__img">
+                        <img src={ImgProduct} />
+                      </div>
+                      <div className="product__name">
+                        <span>Sơn Lót Nội Thất Matex Sealer</span>
+                      </div>
+                    </div>
+                  </div>
                 </>
               );
             }}
