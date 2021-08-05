@@ -40,10 +40,10 @@ export const WraperListCustomer = styled.div`
       padding: 1rem 2rem;
       border: none;
       border-radius: 100px;
-      width: 65%;
+      width: 60%;
       margin-right: -1.25rem;
       font-size: 1.8rem;
-
+      transition: all 0.2s;
       &:focus {
         outline: none;
         width: 70%;
