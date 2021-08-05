@@ -4,6 +4,7 @@ import { WrapContent } from "./AppStyle";
 import Navigation from "./layout/Navigation/Navigation";
 import HomePage from "./pages/HomePage/HomePage";
 import ListCustomer from "./pages/ListCustomer/ListCustomer";
+import OrderPage from "./pages/OrderPage/OrderPage";
 import ProductCode from "./pages/ProductInfo/ProductCode/ProductCode";
 import ProductInfo from "./pages/ProductInfo/ProductInfo";
 import Products from "./pages/ProductsPage/Products";
@@ -22,7 +23,11 @@ const RouterSales = () => {
         <Route strict path="/scan" component={ScanPage} />
         <Route exact path="/nhap-ma-san-pham" component={ProductCode} />
         <Route exact path="/khach-hang" component={ListCustomer} />
+
+        <Route exact path="/don-hang" component={OrderPage} />
+
         <Route exact path="/chi-tiet-san-pham/:id" component={ProductInfo} />
+
       </Switch>
 
       {location.pathname !== "/scan" && <Navigation />}
