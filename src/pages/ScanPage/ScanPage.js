@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import useUserMedia from "../../Hooks/use_openCamera";
 import { WrapCamera } from "./ScanPageStyle";
 import { ReactComponent as Focus } from "../../assets/img/focus.svg";
+import { Link } from "react-router-dom";
 
 const CAPTURE_OPTIONS = {
   audio: false,
@@ -34,11 +35,16 @@ const ScanPage = () => {
       </div>
 
       <div className="container">
-        <p>Vui lòng quét mã vạch trên sản phẩm</p>
-        <svg className="svg">
-          <Focus />
-        </svg>
-        <button className="btn">Quay lại</button>
+        <p>Vui lòng quét mã vạch trên sản phẩm hoặc mã QR</p>
+        <div className="image">
+          <svg className="svg">
+            <Focus />
+          </svg>
+          <div className="line"></div>
+        </div>
+        <Link to="/">
+          <button className="btn">Quay lại</button>
+        </Link>
       </div>
     </WrapCamera>
   );
