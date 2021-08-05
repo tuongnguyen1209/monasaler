@@ -34,7 +34,7 @@ const Navigation = () => {
       <NavLink to="/khach-hang" class="fas fa-user-friends">
         Khách hàng
       </NavLink>
-      <NavLink to="/hoa-don" class="fas fa-receipt ">
+      <NavLink to="/don-hang" class="fas fa-receipt ">
         Đơn hàng
       </NavLink>
       <NavLink to="/thong-ke" class="fas fa-file-invoice-dollar">
