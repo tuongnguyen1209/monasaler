@@ -7,12 +7,14 @@ import { Link } from "react-router-dom";
 const Content = () => {
   return (
     <WraperContent>
-      <div className="scan">
-        <svg className="scan__img">
-          <Scan />
-        </svg>
-        <span className="scan__text">quét mã sản phẩm</span>
-      </div>
+      <Link to="/scan">
+        <div className="scan">
+          <svg className="scan__img">
+            <Scan />
+          </svg>
+          <span className="scan__text">quét mã sản phẩm</span>
+        </div>
+      </Link>
 
       <Link to="/nhap-ma-san-pham">
         <div className="scan">

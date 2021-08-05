@@ -3,18 +3,24 @@ import styled from "styled-components";
 export const WraperListCustomer = styled.div`
   padding: 1rem 2rem;
 
+  .list-customer {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .customer {
-    margin-top: 5rem;
-    width: 100%;
+    margin-top: 1rem;
+    width: 50%;
     align-items: center;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
     &__box {
-      width: 60%;
+      margin-top: 1rem;
+      width: 100%;
       border: 1px solid var(--color-grey-dark-3);
       border-radius: 1rem;
-
-      padding: 2rem 2rem;
+      padding: 1rem;
       font-weight: 500;
       font-size: 1.6rem;
     }
@@ -68,6 +74,11 @@ export const WraperListCustomer = styled.div`
     &__icon {
       color: var(--color-grey-dark-3);
       font-size: 1.8rem;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .customer {
+      width: 100%;
     }
   }
 `;
