@@ -1,7 +1,7 @@
 import React from "react";
 import { WraperNav } from "./NavigationStyle";
 import logo from "../../assets/img/logo-paint.png";
-import { Link, useLocation, useRouteMatch } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const location = useLocation();

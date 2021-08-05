@@ -1,15 +1,25 @@
 import React from "react";
-import SubHeader from "../../compoents/SubHeader";
+import PaintType from "../../compoents/PaintType/PaintType";
+import SubHeader from "../../compoents/SubHeader/SubHeader";
 import { WraperProduct } from "./ProductsStyle";
 
 const Products = () => {
+  const dataKindOFPaint = ["sơn nội thất", "sơn ngoại thất"];
+
+  const paintType = dataKindOFPaint.map((type, index) => {
+    return (
+      <PaintType linkTo="" key={index}>
+        {type}
+      </PaintType>
+    );
+  });
+
   return (
     <WraperProduct>
       <SubHeader>sản phẩm</SubHeader>
       <div className="body">
         <h1 className="body__text">Tra cứu sản phẩm</h1>
-        <div className="body__item">sơn nội thất</div>
-        <div className="body__item">sơn ngoại thất</div>
+        {paintType}
       </div>
     </WraperProduct>
   );
