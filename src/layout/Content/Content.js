@@ -63,19 +63,18 @@ const Content = () => {
           <div className="manual__text">
             <span data-color="red">Bước 1: </span>
             <span data-color="nor">Bấm vào </span>
-            <span data-color="red">QUÉT MÃ SẢN PHẨM</span>
+            <span data-color="red">NHẬP MÃ SẢN PHẨM</span>
             <span data-color="nor">
               {" "}
-              trên màn hình để thực hiện quá trình quét{" "}
+              trên màn hình để thực hiện quá trình nhập{" "}
             </span>
           </div>
           <div className="manual__text">
             <span data-color="red">Bước 2: </span>
             <span data-color="nor">
-              Di chuyển màn hình điện thoại đến vùng mã vạch được dán trên thùng
-              sơn để{" "}
+              Nhập vào dãy số trên mã vạch được dán trên thùng sơn để{" "}
             </span>
-            <span data-color="red"> THỰC HIỆN QUÉT MÃ</span>
+            <span data-color="red"> THỰC HIỆN KIỂM TRA</span>
           </div>
           <div className="manual__text">
             <span data-color="red">Bước 3: </span>
