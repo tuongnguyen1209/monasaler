@@ -57,12 +57,19 @@ export const WraperProduct = styled.div`
     margin-top: 2rem;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
   .product {
+    width: 50%;
+    padding: 1rem 1rem;
     display: flex;
-    border: 1px solid var(--color-grey-light-4);
-    border-radius: 1rem;
-    margin: 1rem 1rem;
+    a {
+      display: flex;
+      border: 1px solid var(--color-grey-light-4);
+      border-radius: 1rem;
+      padding: 1rem 1rem;
+      width: 100%;
+    }
     &__img {
       width: 30%;
       img {

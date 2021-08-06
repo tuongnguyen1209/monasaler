@@ -6,21 +6,16 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
+import { ProductApis } from "../../apis/ProductApis";
 import PaintType from "../../compoents/PaintType/PaintType";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import { WraperProduct } from "./ProductsStyle";
-import ImgProduct from "../../assets/img/matex_sealer.jpg";
-import { ProductApis } from "../../apis/ProductApis";
 
 const Products = () => {
   const [dataKindOFPaint, setDataKindOFPaint] = useState();
-  useEffect(() => {
-    ProductApis.getTypes().then((dataType) => {
-      setDataKindOFPaint(dataType.data.docs);
-    });
-  }, []);
+  const [dataProduct, setDataProduct] = useState([]);
 
-  const parram = useParams();
+  const [query, setQuery] = useState({ limit: 20, types: "" });
   const match1 = useRouteMatch();
   const [currentTypes, setCurrentTypes] = useState({
     loaicha: "",
@@ -28,14 +23,37 @@ const Products = () => {
   });
   const [show, setShow] = useState(true);
   const [title, setTitle] = useState("Sản phẩm");
+  const parram = useParams();
+
+  useEffect(() => {
+    ProductApis.getTypes().then((dataType) => {
+      setDataKindOFPaint(dataType.data.docs);
+    });
+  }, []);
+
+  useEffect(() => {
+    const newQuerry = { ...query, types: currentTypes.loaicha };
+
+    ProductApis.getAll(newQuerry).then((result) => {
+      setDataProduct(result.data.products);
+      console.log(result.data.products);
+    });
+  }, [currentTypes.loaicha]);
+
+  const fillterArrProduct = (arr = []) => {
+    return arr.filter((el) => el.types[1] === currentTypes.loaicon);
+  };
+
   const fillterArr = (arr = [], types = "") => {
     return arr.filter((el) => el.role === types);
   };
+
   const changeType = (loai, tenLoai) => {
     const newCurrentType = { ...currentTypes };
     newCurrentType[tenLoai] = loai;
     setCurrentTypes(newCurrentType);
   };
+
   const onShow = () => {
     if (!currentTypes.loaicon) {
       setShow(!show);
@@ -78,6 +96,21 @@ const Products = () => {
     }
   );
 
+  const listProduct = fillterArrProduct(dataProduct).map((el, index) => {
+    return (
+      <div key={index} className="product">
+        <Link to={`/chi-tiet-san-pham/${el.id}`}>
+          <div className="product__img">
+            <img src={el.image} />
+          </div>
+          <div className="product__name">
+            <span>{el.name}</span>
+          </div>
+        </Link>
+      </div>
+    );
+  });
+
   return (
     <WraperProduct>
       <SubHeader>{title}</SubHeader>
@@ -109,6 +142,11 @@ const Products = () => {
             path={`${match1.path}/:cate1/:cate2`}
             render={({ match }) => {
               const { cate1, cate2 } = match.params;
+              // setCurrentTypes({
+              //   loaicha: cate1,
+              //   loaicon: cate2,
+              // });
+
               setTitle(cate2);
               return (
                 <>
@@ -122,26 +160,7 @@ const Products = () => {
                       <i className="fas fa-search search__icon"></i>
                     </button>
                   </form>
-                  <div className="product-list">
-                    <Link to="/chi-tiet-san-pham/:id">
-                      <div className="product">
-                        <div className="product__img">
-                          <img src={ImgProduct} />
-                        </div>
-                        <div className="product__name">
-                          <span>Sơn Lót Nội Thất Matex Sealer</span>
-                        </div>
-                      </div>
-                    </Link>
-                    <div className="product">
-                      <div className="product__img">
-                        <img src={ImgProduct} />
-                      </div>
-                      <div className="product__name">
-                        <span>Sơn Lót Nội Thất Matex Sealer</span>
-                      </div>
-                    </div>
-                  </div>
+                  <div className="product-list">{listProduct}</div>
                 </>
               );
             }}
