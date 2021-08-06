@@ -79,9 +79,25 @@ export const WraperListCustomer = styled.div`
   .btn-box {
     text-align: center;
   }
+  .popup-content {
+    margin: auto;
+    background: rgb(255, 255, 255);
+    width: 100%;
+    padding: 5px;
+  }
   @media screen and (max-width: 767px) {
+    margin-bottom: 5rem;
     .customer {
       width: 100%;
+    }
+    .search {
+      &__input {
+        width: 95%;
+        margin-left: -2rem;
+        &:focus {
+          width: 95%;
+        }
+      }
     }
   }
 `;

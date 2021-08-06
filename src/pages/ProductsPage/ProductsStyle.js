@@ -93,9 +93,10 @@ export const WraperProduct = styled.div`
       }
     }
     .product-list {
-      flex-direction: column;
+      /* flex-direction: column; */
     }
     .product {
+      width: 100%;
       &__name {
         font-size: 1.6rem;
       }

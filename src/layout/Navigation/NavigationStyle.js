@@ -32,7 +32,7 @@ export const WraperNav = styled.nav`
     }
     &.active::after {
       content: "";
-      background-color: red;
+      background-color: var(--color-primary);
       width: 100%;
       height: 3px;
       position: absolute;
