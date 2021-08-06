@@ -1,28 +1,26 @@
-import React, { useRef, useState } from "react";
-import useUserMedia from "../../Hooks/use_openCamera";
-import { WrapCamera } from "./ScanPageStyle";
-import { ReactComponent as Focus } from "../../assets/img/focus.svg";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import { Link, useHistory } from "react-router-dom";
+import { ReactComponent as Focus } from "../../assets/img/focus.svg";
+import { WrapCamera } from "./ScanPageStyle";
 
-const CAPTURE_OPTIONS = {
-  audio: false,
-  video: { facingMode: "environment" },
-};
 const ScanPage = () => {
-  const canvasRef = useRef();
-  const videoRef = useRef();
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [data, setData] = useState("Not Found");
+  const [data, setData] = useState("");
+  const history = useHistory();
 
-  const mediaStream = useUserMedia(CAPTURE_OPTIONS);
-  if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-    videoRef.current.srcObject = mediaStream;
-  }
+  useEffect(() => {
+    if (checkData()) {
+      console.log(data);
+      console.log("chuyen huong", data.split(":"));
+      history.push(`/chi-tiet-san-pham/${data.split(":")[1]}`);
+    } else {
+      console.log("sai url");
+    }
+  }, [data]);
 
-  const handleCanPlay = () => {
-    setIsVideoPlaying(true);
-    videoRef.current.play();
+  const checkData = () => {
+    console.log(data && data.indexOf("p:") !== -1);
+    return data && data.indexOf("p:") !== -1;
   };
 
   return (
@@ -33,7 +31,7 @@ const ScanPage = () => {
           height="100%"
           onUpdate={(err, result) => {
             if (result) setData(result.text);
-            else setData("Not Found");
+            else setData("");
           }}
         />
       </div>
