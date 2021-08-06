@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Link,
   Route,
@@ -10,50 +10,16 @@ import PaintType from "../../compoents/PaintType/PaintType";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import { WraperProduct } from "./ProductsStyle";
 import ImgProduct from "../../assets/img/matex_sealer.jpg";
+import { ProductApis } from "../../apis/ProductApis";
 
 const Products = () => {
-  const dataKindOFPaint = [
-    {
-      _id: "60f50f75fe00a91594bacc87",
-      name: "Sơn nội thất",
-      role: "Loại cha",
-    },
-    {
-      _id: "60f50f7cfe00a91594bacc89",
-      name: "Sơn ngoại thất",
-      role: "Loại cha",
-    },
-    {
-      _id: "60f50f9bfe00a91594bacc8b",
-      name: "Sơn lót",
-      role: "Loại con",
-    },
-    {
-      _id: "60f50fa8fe00a91594bacc8d",
-      name: "Sơn phủ",
-      role: "Loại con",
-    },
-    {
-      _id: "60f511951d75f323a049d292",
-      name: "Bột trét",
-      role: "Loại con",
-    },
-    {
-      _id: "60f511b81d75f323a049d294",
-      name: "Sơn giữa",
-      role: "Loại con",
-    },
-    {
-      _id: "60f511c31d75f323a049d296",
-      name: "Sơn chống thấm",
-      role: "Loại con",
-    },
-    {
-      _id: "60f511df1d75f323a049d298",
-      name: "Sơn chịu nhiệt",
-      role: "Loại con",
-    },
-  ];
+  const [dataKindOFPaint, setDataKindOFPaint] = useState();
+  useEffect(() => {
+    ProductApis.getTypes().then((dataType) => {
+      setDataKindOFPaint(dataType.data.docs);
+    });
+  }, []);
+
   const parram = useParams();
   const match1 = useRouteMatch();
   const [currentTypes, setCurrentTypes] = useState({
