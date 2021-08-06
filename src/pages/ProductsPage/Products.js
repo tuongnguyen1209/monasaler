@@ -36,7 +36,6 @@ const Products = () => {
 
     ProductApis.getAll(newQuerry).then((result) => {
       setDataProduct(result.data.products);
-      console.log(result.data.products);
     });
   }, [currentTypes.loaicha]);
 
