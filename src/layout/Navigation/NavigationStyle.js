@@ -41,7 +41,7 @@ export const WraperNav = styled.nav`
   }
   .icon {
     color: #ca0b0b;
-    font-size: 2.8rem;
+    font-size: 2rem;
   }
   & > * {
     cursor: pointer;

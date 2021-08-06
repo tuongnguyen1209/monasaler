@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import SubHeader from "../../compoents/SubHeader/SubHeader";
-import { WrapProductInfo } from "./ProductInfoStyle";
-import Img from "../../assets/img/matex_sealer.jpg";
 import { useParams } from "react-router-dom";
 import { ProductApis } from "../../apis/ProductApis";
+import Img from "../../assets/img/matex_sealer.jpg";
+import SubHeader from "../../compoents/SubHeader/SubHeader";
+import ChangeColorText from "../../Hooks/use_ChageColorText";
+import { formatColor, formatPrice } from "../../Hooks/use_Formater";
+import { WrapColor, WrapProductInfo } from "./ProductInfoStyle";
 
 const ProductInfo = () => {
   const [product, setProduct] = useState({
@@ -14,55 +16,84 @@ const ProductInfo = () => {
     types: [],
   });
   const { id } = useParams();
+  const [kw, setKW] = useState("");
 
   useEffect(() => {
     ProductApis.get(id).then((result) => {
-      console.log(result.data.product);
       setProduct(result.data.product);
     });
   }, [id]);
 
+  const filterColter = (arr = []) => {
+    if (kw === "") return arr;
+
+    return arr.filter(
+      (el) =>
+        el.color.name.toLocaleLowerCase().indexOf(kw.toLocaleLowerCase()) !== -1
+    );
+  };
+
+  const handleChangeText = (event) => {
+    const { value } = event.target;
+    setKW(value);
+  };
+
   return (
     <WrapProductInfo>
       <SubHeader>Thông tin sản phẩm</SubHeader>
-      {product && (
-        <div className="product">
-          <div className="product__name">
-            <h1>{product.name}</h1>
+      <div className="product">
+        <div className="product__name">
+          <h1>{product.name}</h1>
+        </div>
+        <div className="product__img">
+          <img src={product.image ? product.image : Img} alt="" />
+        </div>
+        <div className="product__details">
+          <ul className="info">
+            <li>
+              <span>Giá:</span>
+              <strong>{formatPrice(product.lastestPrice)}</strong>
+            </li>
+            <li>
+              <span>Đơn vị:</span>
+              <strong>{product.unit}</strong>
+            </li>
+            <li>
+              <span>Bề mặt:</span>
+              <strong>{product.surfaces.join(",")}</strong>
+            </li>
+            <li>
+              <span>Bề mặt sau sơn:</span>
+              <strong>{product.surfacegloss.join(",")}</strong>
+            </li>
+            <li>
+              <span>Loại:</span>
+              <strong>{product.types.join(",")}</strong>
+            </li>
+          </ul>
+          <div className="titlecl">
+            <h3>Màu sắc</h3>
+            <input
+              placeholder="Tìm kiếm tên màu ... "
+              onChange={handleChangeText}
+            />
+            <p>Nhấp vào màu để lập hóa đơn</p>
           </div>
-          <div className="product__img">
-            <img src={product.image ? product.image : Img} alt="" />
-          </div>
-          <div className="product__details">
-            <ul>
-              <li>
-                <span>Giá:</span>
-                <strong>{product.lastestPrice}</strong>
-              </li>
-              <li>
-                <span>Bề mặt:</span>
-                <strong>{product.surfaces.join(",")}</strong>
-              </li>
-              <li>
-                <span>Bề mặt sau sơn:</span>
-                <strong>{product.surfacegloss.join(",")}</strong>
-              </li>
-              <li>
-                <span>Loại:</span>
-                <strong>{product.types.join(",")}</strong>
-              </li>
-            </ul>
-
-            <p className=" product__text">
-              Nippon WP 200 là loại sơn chống thấm cao cấp, bảo vệ cho các bề
-              mặt tường đứng khỏi sự thấm nước từ phía thi công. Màng sơn có
-              tính năng chống kiềm và chống rêu mốc rất tốt.Sản phẩm không cần
-              pha trộn với xi-măng, dễ thi công.Sơn chống thấm màu vàng, xám -
-              phù hợp với đại đa số công trình tại Việt Nam
-            </p>
+          <div className="colors">
+            {product.colors &&
+              filterColter(product.colors).map((el, index) => (
+                <div className="color" key={`mau-${index}`}>
+                  <WrapColor
+                    dataColor={formatColor(el.color.colorcode)}
+                    textcolor={ChangeColorText(formatColor(el.color.colorcode))}
+                  >
+                    {el.color.name} - {el.inventory}
+                  </WrapColor>
+                </div>
+              ))}
           </div>
         </div>
-      )}
+      </div>
     </WrapProductInfo>
   );
 };

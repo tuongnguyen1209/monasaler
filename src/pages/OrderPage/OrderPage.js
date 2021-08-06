@@ -1,6 +1,6 @@
-import React from "react";
-import Accordion from "../../compoents/Accordion/Accordion";
+import React, { useState } from "react";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
+import Tabs from "../../compoents/Tabs/Tabs";
 import { WrapOderPage } from "./OrderPageStyle";
 const formatDate = (str) => {
   const date = new Date(str);
@@ -12,6 +12,11 @@ const formatDate = (str) => {
 };
 
 const OrderPage = () => {
+  const [tabs, setTabs] = useState([
+    { id: 1, name: "Đơn Hàng Hiện Tại", active: true },
+    { id: 2, name: "Đơn Hàng Chưa Thanh Toán", active: false },
+    { id: 3, name: "Tất Cả Đơn Hàng", active: false },
+  ]);
   const dataOrderOfUser = [
     {
       createAt: "2021-08-03T09:44:29.630Z",
@@ -85,67 +90,10 @@ const OrderPage = () => {
     <WrapOderPage>
       <SubHeader> Đơn Hàng</SubHeader>
       <span>(*) Kích vào số hóa đơn để xem chi tiết </span>
-      <div className="provisinal">
-        <div className="provisinal__header">
-          <h4 className="provisinal__title">Đơn hàng tạm</h4>
-        </div>
-        {getArrByStatus(dataOrderOfUser, "Đơn hàng tạm").map((order) => {
-          return (
-            <Accordion
-              key={order.id}
-              title={`Ngày ${formatDate(order.createAt)}`}
-            >
-              <table id="orders">
-                <thead>
-                  <tr>
-                    <th>Số hóa đơn</th>
-                    <th>Tên khách hàng</th>
-                    <th>Tổng số tiền</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{order.id}</td>
-                    <td>{order.customer.fullname}</td>
-                    <td>{order.totalprice}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </Accordion>
-          );
-        })}
-      </div>
 
-      <div className="provisinal">
-        <div className="provisinal__header">
-          <h4 className="provisinal__title">Đơn đã thanh toán</h4>
-        </div>
-        {getArrByStatus(dataOrderOfUser, "Đã thanh toán").map((order) => {
-          return (
-            <Accordion
-              key={order.id}
-              title={`Ngày ${formatDate(order.createAt)}`}
-            >
-              <table id="orders">
-                <thead>
-                  <tr>
-                    <th>Số hóa đơn</th>
-                    <th>Tên khách hàng</th>
-                    <th>Tổng số tiền</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{order.id}</td>
-                    <td>{order.customer.fullname}</td>
-                    <td>{order.totalprice}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </Accordion>
-          );
-        })}
-      </div>
+      <Tabs tabs={tabs} setTabs={setTabs} />
+
+      {tabs[1].active && <></>}
     </WrapOderPage>
   );
 };
