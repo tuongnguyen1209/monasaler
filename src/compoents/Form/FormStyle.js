@@ -30,6 +30,8 @@ export const WrapForm = styled.div`
   .form__content {
     display: flex;
     flex-direction: column;
+    padding-bottom: 1rem;
+
     width: 100%;
   }
   .form__input {
