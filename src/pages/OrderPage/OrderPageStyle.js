@@ -31,6 +31,7 @@ export const WrapOderPage = styled.div`
   td,
   th {
     padding: 0.5rem 0.5rem;
+    white-space: nowrap;
   }
   td {
     text-align: center;
@@ -38,5 +39,46 @@ export const WrapOderPage = styled.div`
   table {
     border-collapse: collapse;
     width: 100%;
+  }
+`;
+export const ListItemCart = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    .wrapimg {
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      img {
+        width: 100%;
+      }
+    }
+    .info {
+      width: 35%;
+      h4 {
+        color: red;
+        padding: 1rem 0;
+      }
+      .mau {
+        display: flex;
+        justify-content: space-around;
+        .preview {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+        }
+      }
+    }
+    .tinhtoan {
+      width: 35%;
+    }
+    .action {
+      width: 10%;
+    }
   }
 `;
