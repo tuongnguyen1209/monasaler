@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 export const WraperListCustomer = styled.div`
   padding: 1rem 2rem;
-
+  /* position: relative;
+  .subheader {
+    display: flex;
+    position: absolute;
+  } */
   .list-customer {
     display: flex;
     flex-wrap: wrap;

@@ -35,7 +35,9 @@ const ListCustomer = () => {
 
   return (
     <WraperListCustomer>
-      <SubHeader>Khách hàng</SubHeader>
+      <div className="subheader">
+        <SubHeader>Khách hàng</SubHeader>
+      </div>
       <form className="search">
         <input
           type="text"
