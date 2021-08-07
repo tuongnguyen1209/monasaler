@@ -15,18 +15,29 @@ export const WrapOderPage = styled.div`
       text-transform: uppercase;
     }
 
-    #orders {
-      border-collapse: collapse;
-    }
-    #orders td,
-    #orders th {
-      border: 1px solid #ddd;
-      padding: 0 2rem;
-    }
     span {
       font-size: 1.8rem;
       font-weight: 600;
     }
+  }
+  .accordion-list {
+    margin-top: 1rem;
+  }
+  table,
+  td,
+  th {
+    border-bottom: 1px solid var(--color-grey-light-4);
+  }
+  td,
+  th {
+    padding: 0.5rem 0.5rem;
+  }
+  td {
+    text-align: center;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
   }
 `;
 export const ListItemCart = styled.div`

@@ -12,6 +12,7 @@ export const WrapForm = styled.div`
       color: var(--color-primary);
       font-size: 2rem;
       font-weight: 600;
+      padding-bottom: 1rem;
     }
     .close {
       cursor: pointer;
@@ -21,17 +22,17 @@ export const WrapForm = styled.div`
       line-height: 20px;
       right: -10px;
       top: -10px;
-      font-size: 24px;
+      font-size: 2.4rem;
+      font-weight: 600;
       background: #ffffff;
-      border-radius: 18px;
-      border: 1px solid #cfcece;
+      border-radius: 2rem;
+      border: 1px solid var(--color-grey-dark-2);
     }
   }
   .form__content {
     display: flex;
     flex-direction: column;
     padding-bottom: 1rem;
-
     width: 100%;
   }
   .form__input {
@@ -40,5 +41,13 @@ export const WrapForm = styled.div`
     outline: none;
     border: 1px solid var(--color-grey-light-4);
     border-radius: 1rem;
+    font-size: 1.8rem;
+
+    ::-webkit-input-placeholder {
+      font-size: 1.6rem;
+    }
+  }
+  .btn-box {
+    width: 100%;
   }
 `;

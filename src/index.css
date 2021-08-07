@@ -50,8 +50,9 @@ body {
   ); */
 }
 .popup-content {
-  width: 80%;
+  width: 40%;
   border-radius: 5px;
+
 }
 @keyframes anvil {
   0% {
@@ -74,6 +75,12 @@ body {
   -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
 }
 @media (max-width: 767px) {
+  .popup-content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
   .popup-content {
     width: 90%;
   }

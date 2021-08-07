@@ -13,11 +13,12 @@ export const WrapProductInfo = styled.div`
       color: var(--color-primary);
     }
     &__img {
+      width: 50%;
       margin: 2rem 1rem;
       border: 1px solid var(--color-grey-light-4);
       border-radius: 2rem;
       box-shadow: var(--shadow-dark);
-      width: 100%;
+
       img {
         width: 100%;
       }
@@ -77,6 +78,17 @@ export const WrapProductInfo = styled.div`
     }
     &__text {
     }
+  }
+  @media (max-width: 767px) {
+    margin-bottom: 4rem;
+  }
+
+  @media (max-width: 900px) {
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 1200px) {
+    margin-bottom: 5rem;
   }
 `;
 

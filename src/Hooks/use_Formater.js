@@ -20,3 +20,11 @@ export const formatDateFull = (date) => {
     dateStyle: "full",
   }).format(date);
 };
+export const formatDate = (str) => {
+  const date = new Date(str);
+  if (!date) return;
+  return new Intl.DateTimeFormat("vi", {
+    timeStyle: "medium",
+    dateStyle: "full",
+  }).format(date);
+};
