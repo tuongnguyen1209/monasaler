@@ -30,6 +30,7 @@ const UserProvider = ({ children }) => {
     setCart(newCart);
   };
 
+
   const login = (data) => {
     console.log(data);
     localStorage.setItem("token", data.token);
@@ -44,7 +45,20 @@ const UserProvider = ({ children }) => {
   };
 
   console.log(user);
-  const value = { user, cart, addToCart, login, logout, checkLogin };
+ // const value = { user, cart, addToCart, login, logout, checkLogin };
+
+  const changeSLCart = (ind, sl) => {
+    const newcart = [...cart];
+    newcart[ind].quantity = sl;
+    setCart(newcart);
+  };
+  const deleteCart = (ind) => {
+    const newcart = [...cart];
+    newcart.splice(ind, 1);
+    setCart(newcart);
+  };
+
+  const value = { user, cart, addToCart,login, logout, checkLogin , changeSLCart, deleteCart };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
