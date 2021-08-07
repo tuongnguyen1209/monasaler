@@ -31,6 +31,7 @@ export const WrapOderPage = styled.div`
   td,
   th {
     padding: 0.5rem 0.5rem;
+    white-space: nowrap;
   }
   td {
     text-align: center;
