@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { WrapContent } from "./AppStyle";
 import Navigation from "./layout/Navigation/Navigation";
 import HomePage from "./pages/HomePage/HomePage";
@@ -10,9 +10,12 @@ import ProductInfo from "./pages/ProductInfo/ProductInfo";
 import Products from "./pages/ProductsPage/Products";
 import ScanPage from "./pages/ScanPage/ScanPage";
 import logo from "./assets/img/logo-paint.png";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { UserContext } from "./contexts/UserContext";
 
 const RouterSales = () => {
   const location = useLocation();
+  const { checkLogin } = useContext(UserContext);
 
   return (
     <WrapContent
@@ -21,6 +24,7 @@ const RouterSales = () => {
         position: "relative",
       }}
     >
+      {!checkLogin && <Redirect to="/dang-nhap" />}
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route strict path="/san-pham" component={Products} />
@@ -31,9 +35,10 @@ const RouterSales = () => {
         <Route exact path="/don-hang" component={OrderPage} />
 
         <Route exact path="/chi-tiet-san-pham/:id" component={ProductInfo} />
+        <Route exact path="/dang-nhap" component={LoginPage} />
       </Switch>
 
-      {location.pathname !== "/scan" && (
+      {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (
         <div
           style={{
             width: "100%",
@@ -45,7 +50,9 @@ const RouterSales = () => {
           <img src={logo} style={{ width: "15%" }} />
         </div>
       )}
-      {location.pathname !== "/scan" && <Navigation />}
+      {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (
+        <Navigation />
+      )}
     </WrapContent>
   );
 };

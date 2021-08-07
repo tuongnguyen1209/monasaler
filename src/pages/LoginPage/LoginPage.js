@@ -1,11 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { WraperLogin } from "./LoginStyle";
 import bg from "./../../assets/img/login.jpg";
 import logo from "./../../assets/img/logo-paint.png";
+import { UserApis } from "../../apis/UserApis";
+import { useHistory } from "react-router-dom";
+import { NotificationManager } from "react-notifications";
+import { UserContext } from "../../contexts/UserContext";
 
 const LoginPage = () => {
+  const [values, setValues] = useState({ username: "", password: "" });
   const [showRemember, setShowRemember] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const { login } = useContext(UserContext);
+  const history = useHistory();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    UserApis.login(values)
+      .then((result) => {
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        NotificationManager.error(
+          "Thất Bại",
+          "Sai username hoặc mật khẩu",
+          1000
+        );
+      });
+  };
+
   return (
     <WraperLogin>
       <img src={bg} alt="bg" className="bg" />
@@ -15,7 +46,7 @@ const LoginPage = () => {
       <div className="wrap">
         {!showRemember ? <h1>Đăng nhập</h1> : <h1>Quên mật khẩu</h1>}
         {!showRemember && (
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Tên đăng nhập</label>
               <div className="group">
@@ -23,6 +54,8 @@ const LoginPage = () => {
                   type="text"
                   placeholder="Nhập tên đăng nhập..."
                   className="form-control"
+                  name="username"
+                  onChange={handleChange}
                 />
                 <span className="icon">
                   <i className="fas fa-user"></i>
@@ -36,6 +69,8 @@ const LoginPage = () => {
                   type={showPass ? "text" : "password"}
                   placeholder="Nhập mật khẩu..."
                   className="form-control"
+                  name="password"
+                  onChange={handleChange}
                 />
                 <span
                   className="icon"
