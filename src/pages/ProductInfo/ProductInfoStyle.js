@@ -17,6 +17,10 @@ export const WrapProductInfo = styled.div`
       border: 1px solid var(--color-grey-light-4);
       border-radius: 2rem;
       box-shadow: var(--shadow-dark);
+      width: 100%;
+      img {
+        width: 100%;
+      }
     }
     &__details {
       font-size: 1.8rem;
