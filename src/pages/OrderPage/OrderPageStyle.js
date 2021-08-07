@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const WrapOderPage = styled.div`
   padding: 1rem 2rem;
+  .note-text {
+    color: var(--color-primary);
+    padding: 1rem;
+  }
   .provisinal {
     width: 70%;
     margin: 3rem auto;
@@ -32,6 +36,9 @@ export const WrapOderPage = styled.div`
   th {
     padding: 0.5rem 0.5rem;
     white-space: nowrap;
+  }
+  td > a {
+    color: var(--color-primary);
   }
   td {
     text-align: center;

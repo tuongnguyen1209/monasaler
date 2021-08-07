@@ -12,6 +12,7 @@ import ScanPage from "./pages/ScanPage/ScanPage";
 import logo from "./assets/img/logo-paint.png";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { UserContext } from "./contexts/UserContext";
+import OrderDetail from "./pages/OrderPage/OrderDetail/OrderDetail";
 
 const RouterSales = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const RouterSales = () => {
     >
       {!checkLogin && <Redirect to="/dang-nhap" />}
       {checkLogin && <Redirect to="/" />}
+
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route strict path="/san-pham" component={Products} />
@@ -36,6 +38,7 @@ const RouterSales = () => {
         <Route exact path="/don-hang" component={OrderPage} />
 
         <Route exact path="/chi-tiet-san-pham/:id" component={ProductInfo} />
+        <Route exact path="/chi-tiet-don-hang/:id" component={OrderDetail} />
         <Route exact path="/dang-nhap" component={LoginPage} />
       </Switch>
 

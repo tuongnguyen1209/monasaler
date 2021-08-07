@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { CustomerssApis } from "../../apis/CustomerApis";
 import Button from "../Button/Button";
 import { WrapForm } from "./FormStyle";
+import { NotificationManager } from "react-notifications";
 
 const Form = (props) => {
   const [values, setValues] = useState({
@@ -8,14 +10,46 @@ const Form = (props) => {
     email: "",
     phone: "",
     address: "",
+    job: "designer",
   });
+
+  useEffect(() => {
+    if (props.dataEdit) {
+      setValues(props.dataEdit);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (values._id) {
+      CustomerssApis.update(values._id, values)
+        .then((result) => {
+          props.updateCus(result.data.doc, props.index);
+          console.log(result);
+          NotificationManager.success("Sửa thông tin khách hàng thành công");
+          props.close();
+        })
+        .catch(() => {
+          NotificationManager.error("Thất Bại", "Đã có lỗi xảy ra", 1000);
+        });
+    } else {
+      CustomerssApis.insert(values)
+        .then((result) => {
+          props.updateCus(result.doc);
+          console.log(result);
+          NotificationManager.success("Thêm khách hàng thành công");
+          props.close();
+        })
+        .catch((error) => {
+          console.log(error);
+          NotificationManager.error("Thất Bại", "Đã có lỗi xảy ra", 1000);
+        });
+    }
   };
   return (
     <WrapForm>

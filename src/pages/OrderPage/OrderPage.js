@@ -100,7 +100,9 @@ const OrderPage = () => {
   return (
     <WrapOderPage>
       <SubHeader> Đơn Hàng</SubHeader>
-      <span>(*) Kích vào số hóa đơn để xem chi tiết </span>
+      <span className="note-text">
+        (*) Kích vào mã đơn hàng để xem chi tiết
+      </span>
       <Tabs tabs={tabs} setTabs={setTabs} />
 
       {tabs[0].active && (
@@ -178,7 +180,12 @@ const OrderPage = () => {
                 <th>Số tiền</th>
               </tr>
               <tr>
-                <td>{dataOrderOfUser[0].id}</td>
+                <td>
+                  <Link to="/chi-tiet-don-hang/:id">
+                    {dataOrderOfUser[0].id}
+                  </Link>
+                </td>
+
                 <td>{dataOrderOfUser[0].customer.fullname}</td>
                 <td>{formatPrice(dataOrderOfUser[0].totalprice)}</td>
               </tr>

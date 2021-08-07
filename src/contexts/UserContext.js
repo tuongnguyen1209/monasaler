@@ -18,6 +18,7 @@ const UserProvider = ({ children }) => {
         })
         .catch((err) => {
           setCheckLogin(false);
+          console.log(err);
         });
     } else {
       setCheckLogin(false);
@@ -31,7 +32,7 @@ const UserProvider = ({ children }) => {
   };
 
   const login = (data) => {
-    console.log(data);
+    // console.log(data);
     localStorage.setItem("token", data.token);
     setUser(data.user);
     setCheckLogin(true);
@@ -42,6 +43,7 @@ const UserProvider = ({ children }) => {
     setUser({});
     setCheckLogin(false);
   };
+
 
   // const value = { user, cart, addToCart, login, logout, checkLogin };
 
@@ -56,6 +58,7 @@ const UserProvider = ({ children }) => {
     newcart.splice(ind, 1);
     setCart(newcart);
   };
+
 
   const clearCart = () => {
     setCart([]);
