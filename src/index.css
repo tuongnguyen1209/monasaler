@@ -51,6 +51,8 @@ body {
 }
 .popup-content {
   width: 40%;
+  border-radius: 5px;
+
 }
 @keyframes anvil {
   0% {

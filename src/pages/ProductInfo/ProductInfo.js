@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Popup from "reactjs-popup";
 import { ProductApis } from "../../apis/ProductApis";
 import Img from "../../assets/img/matex_sealer.jpg";
+import AddColorForm from "../../compoents/AddColorForm/AddColorForm";
+import Button from "../../compoents/Button/Button";
+import Form from "../../compoents/Form/Form";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import ChangeColorText from "../../Hooks/use_ChageColorText";
 import { formatColor, formatPrice } from "../../Hooks/use_Formater";
-import { WrapColor, WrapProductInfo } from "./ProductInfoStyle";
+import { WrapAddCart, WrapColor, WrapProductInfo } from "./ProductInfoStyle";
 
 const ProductInfo = () => {
   const [product, setProduct] = useState({
@@ -87,7 +91,16 @@ const ProductInfo = () => {
                     dataColor={formatColor(el.color.colorcode)}
                     textcolor={ChangeColorText(formatColor(el.color.colorcode))}
                   >
-                    {el.color.name} - {el.inventory}
+                    <Popup
+                      trigger={
+                        <div className="btn-box">
+                          {el.color.name} - {el.inventory}
+                        </div>
+                      }
+                      modal
+                    >
+                      {(close) => <AddColorForm product={product} color={el} />}
+                    </Popup>
                   </WrapColor>
                 </div>
               ))}
