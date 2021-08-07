@@ -54,6 +54,8 @@ export const ListItemCart = styled.div`
           justify-content: space-around;
           align-items: center;
           .preview {
+            border: 1px solid var(--color-grey-dark-3);
+
             width: 2rem;
             height: 2rem;
             border-radius: 50%;

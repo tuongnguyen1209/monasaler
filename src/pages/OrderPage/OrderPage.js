@@ -1,14 +1,16 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { NotificationManager } from "react-notifications";
+import Popup from "reactjs-popup";
 import { formatDate, formatPrice } from "../../../src/Hooks/use_Formater";
-import Img from "../../assets/img/matex_sealer.jpg";
+import OrdersApis from "../../apis/OrdersApi";
 import Accordion from "../../compoents/Accordion/Accordion";
 import Button from "../../compoents/Button/Button";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import Tabs from "../../compoents/Tabs/Tabs";
 import { UserContext } from "../../contexts/UserContext";
 import CartItem from "./CartItem/CartItem";
-import { ListItemCart, WrapOderPage } from "./OrderPageStyle";
+import ChoceCustomer from "./ChonceCustomer/ChoceCustomer";
+import { WrapOderPage } from "./OrderPageStyle";
 
 const dataOrderOfUser = [
   {
@@ -42,8 +44,58 @@ const OrderPage = () => {
     { id: 2, name: "Đơn Hàng Chưa Thanh Toán", active: false },
     { id: 3, name: "Tất Cả Đơn Hàng", active: false },
   ]);
+  const [steper, setSteper] = useState(0);
+  const { cart, user, clearCart } = useContext(UserContext);
+  const [customer, setCustomer] = useState({});
 
-  const { cart } = useContext(UserContext);
+  const chonceUser = (u) => {
+    setCustomer(u);
+    setSteper(2);
+  };
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      setSteper(1);
+    }
+  }, []);
+
+  const totalCart = () => {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      const element = cart[i];
+      total += element.quantity * element.price;
+    }
+    return total;
+  };
+
+  const confirmOrder = () => {
+    const order = {
+      saler: user._id,
+      customer: customer._id,
+      details: [],
+      type: "Đơn hàng bán",
+    };
+    for (let i = 0; i < cart.length; i++) {
+      const element = cart[i];
+      order.details.push({
+        product: element.product._id,
+        color: element.color._id,
+        price: element.price,
+        quantity: element.quantity,
+      });
+    }
+
+    OrdersApis.createOrder(order)
+      .then((result) => {
+        console.log(result);
+        NotificationManager.success("Thêm đơn hàng thành công!!!");
+        setSteper(0);
+        clearCart();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <WrapOderPage>
@@ -58,8 +110,62 @@ const OrderPage = () => {
           {cart.map((el, ind) => (
             <CartItem key={ind} ind={ind} el={el} />
           ))}
-          <div style={{ textAlign: "center" }}>
-            <Button>Chuyển hóa đơn</Button>
+
+          <div style={{ textAlign: "center", margin: "1rem 0" }}>
+            {steper === 0 && <p>Bạn chưa thêm sản phẩm nào</p>}
+            {steper === 1 && (
+              <Popup
+                trigger={
+                  <div className="btn-box">
+                    <Button>Chọn khách hàng</Button>
+                  </div>
+                }
+                modal
+              >
+                {(close) => (
+                  <ChoceCustomer chonceUser={chonceUser} close={close} />
+                )}
+              </Popup>
+            )}
+            {steper === 2 && (
+              <>
+                <ul className="orderinfo">
+                  <li>
+                    <span>Tên khách hàng:</span>
+                    <strong>{customer.fullname}</strong>
+                  </li>
+                  <li>
+                    <span>Số Điện Thoại:</span>
+                    <strong>{customer.phone}</strong>
+                  </li>
+                  {/* <li>
+                    <span>Địa chỉ:</span>
+                    <strong></strong>
+                  </li> */}
+                  <div className="line"></div>
+                  <li>
+                    <span>Tổng hóa đơn:</span>
+                    <strong className="price">
+                      {formatPrice(totalCart())}
+                    </strong>
+                  </li>
+
+                  <li>
+                    <span>Thuế:</span>
+                    <strong className="price">
+                      {formatPrice(totalCart() * 0.1)}
+                    </strong>
+                  </li>
+                  <li>
+                    <span>Tổng cộng:</span>
+                    <strong className="price">
+                      {formatPrice(totalCart() * 1.1)}
+                    </strong>
+                  </li>
+                </ul>
+                <Button onClick={confirmOrder}>Chuyển hóa đơn</Button>
+              </>
+            )}
           </div>
         </>
       )}

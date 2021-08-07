@@ -6,7 +6,7 @@ export const UserApis = {
   login: (user) => {
     return axiosClient.post(`${url}/login`, user);
   },
-  getUserInfo: () => {
-    return axiosClient.put(`${url}/updateMe`);
+  getUserInfo: async () => {
+    return await axiosClient.put(`${url}/updateMe`);
   },
 };

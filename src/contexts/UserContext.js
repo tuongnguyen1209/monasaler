@@ -44,7 +44,7 @@ const UserProvider = ({ children }) => {
     setCheckLogin(false);
   };
 
-  console.log(user);
+
   // const value = { user, cart, addToCart, login, logout, checkLogin };
 
   const changeSLCart = (ind, sl) => {
@@ -52,21 +52,28 @@ const UserProvider = ({ children }) => {
     newcart[ind].quantity = sl;
     setCart(newcart);
   };
+
   const deleteCart = (ind) => {
     const newcart = [...cart];
     newcart.splice(ind, 1);
     setCart(newcart);
   };
 
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const value = {
     user,
     cart,
+    checkLogin,
     addToCart,
     login,
     logout,
-    checkLogin,
     changeSLCart,
     deleteCart,
+    clearCart,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

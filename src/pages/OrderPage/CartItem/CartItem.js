@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ListItemCart } from "./CartItemStyle";
 import Img from "../../../assets/img/matex_sealer.jpg";
 import { Link } from "react-router-dom";
-import { formatPrice } from "../../../Hooks/use_Formater";
+import { formatColor, formatPrice } from "../../../Hooks/use_Formater";
 import { UserContext } from "../../../contexts/UserContext";
 
 const CartItem = (props) => {
@@ -58,7 +58,9 @@ const CartItem = (props) => {
             <div className="mau">
               <span
                 className="preview"
-                style={{ backgroundColor: "red" }}
+                style={{
+                  backgroundColor: formatColor(el.color.color.colorcode),
+                }}
               ></span>
               <span>{el.color && el.color.color.name}</span>
             </div>
