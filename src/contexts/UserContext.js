@@ -18,6 +18,7 @@ const UserProvider = ({ children }) => {
         })
         .catch((err) => {
           setCheckLogin(false);
+          console.log(err);
         });
     } else {
       setCheckLogin(false);
@@ -30,9 +31,8 @@ const UserProvider = ({ children }) => {
     setCart(newCart);
   };
 
-
   const login = (data) => {
-    console.log(data);
+    // console.log(data);
     localStorage.setItem("token", data.token);
     setUser(data.user);
     setCheckLogin(true);
@@ -45,7 +45,7 @@ const UserProvider = ({ children }) => {
   };
 
   console.log(user);
- // const value = { user, cart, addToCart, login, logout, checkLogin };
+  // const value = { user, cart, addToCart, login, logout, checkLogin };
 
   const changeSLCart = (ind, sl) => {
     const newcart = [...cart];
@@ -58,7 +58,16 @@ const UserProvider = ({ children }) => {
     setCart(newcart);
   };
 
-  const value = { user, cart, addToCart,login, logout, checkLogin , changeSLCart, deleteCart };
+  const value = {
+    user,
+    cart,
+    addToCart,
+    login,
+    logout,
+    checkLogin,
+    changeSLCart,
+    deleteCart,
+  };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

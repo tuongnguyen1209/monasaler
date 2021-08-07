@@ -8,7 +8,8 @@ import Form from "../../compoents/Form/Form";
 
 const ListCustomer = () => {
   const [dataCustomer, setDataCustomer] = useState([]);
-  const [query, setQuery] = useState({ limit: 10, page: 1 });
+  const [query, setQuery] = useState({ limit: 20, page: 1 });
+  const [dataEdit, setDataEdit] = useState({});
 
   useEffect(() => {
     let newData = [];
@@ -18,10 +19,47 @@ const ListCustomer = () => {
     });
   }, []);
 
-  const customer = dataCustomer.map((el) => {
+  const updateCus = (newCus, index) => {
+    const newDataCus = [...dataCustomer];
+    if (index) {
+      newDataCus[index] = newCus;
+    } else {
+      newDataCus.push(newCus);
+    }
+    setDataCustomer(newDataCus);
+  };
+
+  const handleEdit = (cus) => {
+    setDataEdit(cus);
+  };
+  console.log(dataEdit);
+  const customer = dataCustomer.map((el, index) => {
     return (
       <div key={el.id} className="customer">
         <div className="customer__box">
+          <Popup
+            trigger={
+              <span className="customer__box--edit">
+                <i
+                  onClick={() => {
+                    handleEdit(el);
+                  }}
+                  className="fas fa-user-edit customer__box--edit-icon"
+                />
+              </span>
+            }
+            modal
+          >
+            {(close) => (
+              <Form
+                updateCus={updateCus}
+                index={index}
+                dataEdit={dataEdit}
+                close={close}
+              />
+            )}
+          </Popup>
+
           <p className="customer__name">{el.fullname}</p>
           <p className="customer__address">
             184 Phan Đình Phùng, p.18, Q.Phú Nhuận
@@ -58,7 +96,7 @@ const ListCustomer = () => {
         }
         modal
       >
-        {(close) => <Form close={close} />}
+        {(close) => <Form updateCus={updateCus} close={close} />}
       </Popup>
     </WraperListCustomer>
   );

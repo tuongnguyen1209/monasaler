@@ -19,18 +19,27 @@ export const WraperListCustomer = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     padding: 1rem;
+
     &__box {
       margin-top: 1rem;
       width: 100%;
-      border: 1px solid var(--color-grey-dark-3);
-      border-radius: 1rem;
+      background-color: var(--color-grey-light-2);
       padding: 1rem;
       font-weight: 500;
       font-size: 1.6rem;
       /* & > *:not(:last-child) {
         border-bottom: 1px solid var(--color-grey-dark-3);
       } */
-
+      position: relative;
+      &--edit {
+        width: 100%;
+        cursor: pointer;
+        &-icon {
+          position: absolute;
+          right: 1rem;
+          color: var(--color-primary);
+        }
+      }
       & > *:not(:last-child) {
         margin-bottom: 0.5rem;
       }

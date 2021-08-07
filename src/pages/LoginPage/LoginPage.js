@@ -25,6 +25,7 @@ const LoginPage = () => {
     e.preventDefault();
     UserApis.login(values)
       .then((result) => {
+        login(result.data);
         history.push("/");
       })
       .catch((err) => {
