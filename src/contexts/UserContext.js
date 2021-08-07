@@ -12,7 +12,18 @@ const UserProvider = ({ children }) => {
     setCart(newCart);
   };
 
-  const value = { user, cart, addToCart };
+  const changeSLCart = (ind, sl) => {
+    const newcart = [...cart];
+    newcart[ind].quantity = sl;
+    setCart(newcart);
+  };
+  const deleteCart = (ind) => {
+    const newcart = [...cart];
+    newcart.splice(ind, 1);
+    setCart(newcart);
+  };
+
+  const value = { user, cart, addToCart, changeSLCart, deleteCart };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
