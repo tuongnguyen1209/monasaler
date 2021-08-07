@@ -40,4 +40,28 @@ export const WrapOderPage = styled.div`
     border-collapse: collapse;
     width: 100%;
   }
+  .orderinfo {
+    width: 100%;
+    list-style-type: none;
+    .line {
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-grey-light-4);
+    }
+    li {
+      display: flex;
+      padding: 1rem 0.5rem;
+      span {
+        width: 40%;
+        text-align: left;
+      }
+      strong {
+        text-align: left;
+        width: 60%;
+        &.price {
+          text-align: right;
+        }
+      }
+    }
+  }
 `;

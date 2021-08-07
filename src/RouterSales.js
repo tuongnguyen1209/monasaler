@@ -25,6 +25,7 @@ const RouterSales = () => {
       }}
     >
       {!checkLogin && <Redirect to="/dang-nhap" />}
+      {checkLogin && <Redirect to="/" />}
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route strict path="/san-pham" component={Products} />
