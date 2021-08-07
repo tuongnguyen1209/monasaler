@@ -23,6 +23,13 @@ export const WraperListCustomer = styled.div`
       padding: 1rem;
       font-weight: 500;
       font-size: 1.6rem;
+      /* & > *:not(:last-child) {
+        border-bottom: 1px solid var(--color-grey-dark-3);
+      } */
+
+      & > *:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
     }
     &__name {
       font-weight: bold;
@@ -77,16 +84,12 @@ export const WraperListCustomer = styled.div`
     }
   }
   .btn-box {
+    margin-top: 2rem;
     text-align: center;
   }
-  .popup-content {
-    margin: auto;
-    background: rgb(255, 255, 255);
-    width: 100%;
-    padding: 5px;
-  }
+
   @media screen and (max-width: 767px) {
-    margin-bottom: 5rem;
+    margin-bottom: 9rem;
     .customer {
       width: 100%;
     }

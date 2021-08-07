@@ -9,13 +9,17 @@ import ProductCode from "./pages/ProductInfo/ProductCode/ProductCode";
 import ProductInfo from "./pages/ProductInfo/ProductInfo";
 import Products from "./pages/ProductsPage/Products";
 import ScanPage from "./pages/ScanPage/ScanPage";
+import logo from "./assets/img/logo-paint.png";
 
 const RouterSales = () => {
   const location = useLocation();
 
   return (
     <WrapContent
-      style={{ paddingBottom: location.pathname !== "/scan" ? "10%" : 0 }}
+      style={{
+        paddingBottom: location.pathname !== "/scan" ? "10%" : 0,
+        position: "relative",
+      }}
     >
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -27,9 +31,20 @@ const RouterSales = () => {
         <Route exact path="/don-hang" component={OrderPage} />
 
         <Route exact path="/chi-tiet-san-pham/:id" component={ProductInfo} />
-
       </Switch>
 
+      {location.pathname !== "/scan" && (
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+            bottom: 80,
+            position: "absolute",
+          }}
+        >
+          <img src={logo} style={{ width: "15%" }} />
+        </div>
+      )}
       {location.pathname !== "/scan" && <Navigation />}
     </WrapContent>
   );

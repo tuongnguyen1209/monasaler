@@ -3,7 +3,6 @@ import { CustomerssApis } from "../../apis/CustomerApis";
 import Button from "../../compoents/Button/Button";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import Popup from "reactjs-popup";
-// import "reactjs-popup/dist/index.css";
 import { WraperListCustomer } from "./ListCustomerStyle";
 import Form from "../../compoents/Form/Form";
 

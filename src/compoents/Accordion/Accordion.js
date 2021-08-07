@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { WrapAccordion } from "./AccordionStyle";
 
 const Accordion = (props) => {
-  const [show, setshow] = useState(true);
+  const [show, setshow] = useState(false);
 
   const onShow = () => {
     setshow(!show);

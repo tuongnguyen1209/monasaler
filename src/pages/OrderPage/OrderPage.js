@@ -1,15 +1,9 @@
 import React, { useState } from "react";
+import Accordion from "../../compoents/Accordion/Accordion";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import Tabs from "../../compoents/Tabs/Tabs";
 import { WrapOderPage } from "./OrderPageStyle";
-const formatDate = (str) => {
-  const date = new Date(str);
-  if (!date) return;
-  return new Intl.DateTimeFormat("vi", {
-    timeStyle: "medium",
-    dateStyle: "full",
-  }).format(date);
-};
+import { formatDate, formatPrice } from "../../../src/Hooks/use_Formater";
 
 const OrderPage = () => {
   const [tabs, setTabs] = useState([
@@ -83,6 +77,7 @@ const OrderPage = () => {
       id: "610910fc62d5ca246cdad579",
     },
   ];
+
   const getArrByStatus = (arr = [], status) => {
     return arr.filter((e) => e.status === status);
   };
@@ -92,8 +87,29 @@ const OrderPage = () => {
       <span>(*) Kích vào số hóa đơn để xem chi tiết </span>
 
       <Tabs tabs={tabs} setTabs={setTabs} />
-
-      {tabs[1].active && <></>}
+      {tabs[0].active && (
+        <div className="accordion-list">
+          <Accordion title={formatDate(dataOrderOfUser[0].createAt)}>
+            <table>
+              <tr>
+                <th>Mã đơn hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Số tiền</th>
+              </tr>
+              <tr>
+                <td>{dataOrderOfUser[0].id}</td>
+                <td>{dataOrderOfUser[0].customer.fullname}</td>
+                <td>{formatPrice(dataOrderOfUser[0].totalprice)}</td>
+              </tr>
+            </table>
+          </Accordion>
+        </div>
+      )}
+      {tabs[1].active && (
+        <>
+          <p>abc</p>
+        </>
+      )}
     </WrapOderPage>
   );
 };

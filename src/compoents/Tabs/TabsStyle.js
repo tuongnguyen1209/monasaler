@@ -15,6 +15,8 @@ export const WrapperTabs = styled.header`
     color: var(--text-color);
     margin: 0 1rem;
     padding: 1rem;
+    font-size: 1.6rem;
+    font-weight: 600;
     position: relative;
     white-space: nowrap;
     transition: all 0.2s;
@@ -32,7 +34,7 @@ export const WrapperTabs = styled.header`
         left: 0;
         display: block;
         position: absolute;
-        top: 0;
+        bottom: 0;
       }
     }
   }
