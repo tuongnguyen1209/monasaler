@@ -83,6 +83,7 @@ export const WraperProduct = styled.div`
     }
   }
   @media (max-width: 767px) {
+    margin-bottom: 6rem;
     .search {
       &__input {
         width: 95%;
