@@ -4,18 +4,15 @@ import Popup from "reactjs-popup";
 import { ProductApis } from "../../apis/ProductApis";
 import Img from "../../assets/img/matex_sealer.jpg";
 import AddColorForm from "../../compoents/AddColorForm/AddColorForm";
-import Button from "../../compoents/Button/Button";
-import Form from "../../compoents/Form/Form";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import ChangeColorText from "../../Hooks/use_ChageColorText";
 import { formatColor, formatPrice } from "../../Hooks/use_Formater";
-import { WrapAddCart, WrapColor, WrapProductInfo } from "./ProductInfoStyle";
+import { WrapColor, WrapProductInfo } from "./ProductInfoStyle";
 
 const ProductInfo = () => {
   const [product, setProduct] = useState({
     lastestPrice: 0,
     surfaces: [],
-    surfacegloss: [],
     surfacegloss: [],
     types: [],
   });

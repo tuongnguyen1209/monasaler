@@ -58,6 +58,7 @@ const OrderPage = () => {
     if (cart.length > 0) {
       setSteper(1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const totalCart = () => {

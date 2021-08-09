@@ -26,7 +26,6 @@ const RouterSales = () => {
       }}
     >
       {!checkLogin && <Redirect to="/dang-nhap" />}
-      {checkLogin && <Redirect to="/" />}
 
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -51,7 +50,7 @@ const RouterSales = () => {
             position: "absolute",
           }}
         >
-          <img src={logo} style={{ width: "15%" }} />
+          <img src={logo} style={{ width: "15%" }} alt="hinh" />
         </div>
       )}
       {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (

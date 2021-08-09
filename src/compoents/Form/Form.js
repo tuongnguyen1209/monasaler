@@ -3,6 +3,7 @@ import { CustomerssApis } from "../../apis/CustomerApis";
 import Button from "../Button/Button";
 import { WrapForm } from "./FormStyle";
 import { NotificationManager } from "react-notifications";
+import { Link } from "react-router-dom";
 
 const Form = (props) => {
   const [values, setValues] = useState({
@@ -17,6 +18,7 @@ const Form = (props) => {
     if (props.dataEdit) {
       setValues(props.dataEdit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e) => {
@@ -54,9 +56,16 @@ const Form = (props) => {
   return (
     <WrapForm>
       <div className="form__header">
-        <a className="close" onClick={props.close}>
+        <Link
+          to=""
+          className="close"
+          onClick={(e) => {
+            e.preventDefault();
+            props.close();
+          }}
+        >
           &times;
-        </a>
+        </Link>
         <p className="form__header-title">Thông tin khách hàng</p>
       </div>
       <form className="form__content">
