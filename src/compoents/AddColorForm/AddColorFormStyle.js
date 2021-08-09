@@ -31,7 +31,7 @@ export const WrapAddCart = styled.div`
         width: 3rem;
         height: 3rem;
         border: 1px solid;
-        border-radius: 50%;
+        border-radius: 0.5rem;
       }
       .namecl {
         width: 60%;

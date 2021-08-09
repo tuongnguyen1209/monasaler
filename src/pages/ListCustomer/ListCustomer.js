@@ -8,7 +8,7 @@ import Form from "../../compoents/Form/Form";
 
 const ListCustomer = () => {
   const [dataCustomer, setDataCustomer] = useState([]);
-  const [query, setQuery] = useState({ limit: 20, page: 1 });
+  const query = { limit: 20, page: 1 };
   const [dataEdit, setDataEdit] = useState({});
 
   useEffect(() => {
@@ -17,11 +17,13 @@ const ListCustomer = () => {
       newData = result.data.docs;
       setDataCustomer(newData);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateCus = (newCus, index) => {
     const newDataCus = [...dataCustomer];
-    if (index) {
+    console.log(index);
+    if (index !== undefined && index !== null) {
       newDataCus[index] = newCus;
     } else {
       newDataCus.push(newCus);

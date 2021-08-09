@@ -23,7 +23,7 @@ const CartItem = (props) => {
     <ListItemCart>
       <div className="item">
         <div className="wrapimg">
-          <img src={Img} />
+          <img src={Img} alt="hinh" />
         </div>
         <div className="info">
           <h4>
@@ -78,6 +78,9 @@ const CartItem = (props) => {
   );
 };
 
-CartItem.propTypes = {};
+CartItem.propTypes = {
+  el: PropTypes.object,
+  ind: PropTypes.number,
+};
 
 export default CartItem;
