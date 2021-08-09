@@ -122,7 +122,7 @@ const Products = () => {
             exact
             path={`${match1.path}`}
             render={() => {
-              setTitle("Sản phẩm");
+              // setTitle("Sản phẩm");
               return paintType1;
             }}
           />
@@ -131,7 +131,7 @@ const Products = () => {
             exact
             path={`${match1.path}/:cate`}
             render={({ match }) => {
-              setTitle(match.params.cate);
+              // setTitle(match.params.cate);
               return paintType2;
             }}
           />
@@ -146,7 +146,7 @@ const Products = () => {
               //   loaicon: cate2,
               // });
 
-              setTitle(cate2);
+              // setTitle(cate2);
               return (
                 <>
                   <form className="search">
