@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const Form = (props) => {
   const [values, setValues] = useState({
+    id: "",
     fullname: "",
     email: "",
     phone: "",
@@ -20,7 +21,6 @@ const Form = (props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
@@ -28,28 +28,27 @@ const Form = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (values._id) {
-      CustomerssApis.update(values._id, values)
+    if (values.id) {
+      CustomerssApis.update(values.id, values)
         .then((result) => {
-          props.updateCus(result.data.doc, props.index);
-          console.log(result);
+          props.updateList(result.data.doc);
           NotificationManager.success("Sửa thông tin khách hàng thành công");
           props.close();
         })
         .catch(() => {
-          NotificationManager.error("Thất Bại", "Đã có lỗi xảy ra", 1000);
+          NotificationManager.error("Sửa thông tin khách hàng thất bại");
+          props.close();
         });
     } else {
       CustomerssApis.insert(values)
         .then((result) => {
-          props.updateCus(result.doc);
-          console.log(result);
+          props.addNewCus(result.doc);
           NotificationManager.success("Thêm khách hàng thành công");
           props.close();
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           NotificationManager.error("Thất Bại", "Đã có lỗi xảy ra", 1000);
+          props.close();
         });
     }
   };
@@ -74,7 +73,7 @@ const Form = (props) => {
           className="form__input"
           placeholder="Họ và tên"
           name="fullname"
-          value={values.fullname}
+          value={values.fullname || ""}
           onChange={handleChange}
         />
         <input
@@ -82,7 +81,7 @@ const Form = (props) => {
           className="form__input"
           placeholder="Email"
           name="email"
-          value={values.email}
+          value={values.email || ""}
           onChange={handleChange}
         />
         <input
@@ -90,7 +89,7 @@ const Form = (props) => {
           className="form__input"
           placeholder="Số điện thoại"
           name="phone"
-          value={values.phone}
+          value={values.phone || ""}
           onChange={handleChange}
         />
         <input
@@ -98,7 +97,7 @@ const Form = (props) => {
           className="form__input"
           placeholder="Địa chỉ"
           name="address"
-          value={values.address}
+          value={values.address || ""}
           onChange={handleChange}
         />
       </form>

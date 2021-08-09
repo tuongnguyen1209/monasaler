@@ -176,21 +176,25 @@ const OrderPage = () => {
         <div className="accordion-list">
           <Accordion title={formatDate(dataOrderOfUser[0].createAt)}>
             <table>
-              <tr>
-                <th>Mã đơn hàng</th>
-                <th>Tên khách hàng</th>
-                <th>Số tiền</th>
-              </tr>
-              <tr>
-                <td>
-                  <Link to="/chi-tiet-don-hang/:id">
-                    {dataOrderOfUser[0].id}
-                  </Link>
-                </td>
+              <thead>
+                <tr>
+                  <th>Mã đơn hàng</th>
+                  <th>Tên khách hàng</th>
+                  <th>Số tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Link to="/chi-tiet-don-hang/:id">
+                      {dataOrderOfUser[0].id}
+                    </Link>
+                  </td>
 
-                <td>{dataOrderOfUser[0].customer.fullname}</td>
-                <td>{formatPrice(dataOrderOfUser[0].totalprice)}</td>
-              </tr>
+                  <td>{dataOrderOfUser[0].customer.fullname}</td>
+                  <td>{formatPrice(dataOrderOfUser[0].totalprice)}</td>
+                </tr>
+              </tbody>
             </table>
           </Accordion>
         </div>

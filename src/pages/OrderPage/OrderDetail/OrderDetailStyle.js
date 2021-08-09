@@ -7,8 +7,11 @@ export const WrapOrderDetail = styled.div`
     padding-top: 3rem;
     .product {
       background-color: var(--color-grey-light-2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
       &__box2 {
         display: flex;
+
         &:not(:last-child) {
           border-bottom: 2px solid var(--color-grey-light-4);
         }
@@ -43,6 +46,7 @@ export const WrapOrderDetail = styled.div`
       padding: 1rem 1rem;
       margin-bottom: 0.8rem;
       background-color: var(--color-grey-light-2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     &__icon {
       color: var(--color-primary);
@@ -78,6 +82,7 @@ export const WrapOrderDetail = styled.div`
     .price-summary {
       margin-top: 0.8rem;
       background-color: var(--color-grey-light-2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
       .summary {
         padding: 1rem;
@@ -99,6 +104,9 @@ export const WrapOrderDetail = styled.div`
         }
       }
     }
+  }
+  .none {
+    box-shadow: 0 0 0;
   }
   .btn-box {
     margin-top: 2rem;

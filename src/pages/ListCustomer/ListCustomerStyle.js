@@ -10,6 +10,7 @@ export const WraperListCustomer = styled.div`
   .list-customer {
     display: flex;
     flex-wrap: wrap;
+    overflow-y: auto;
   }
   .customer {
     margin-top: 1rem;
@@ -27,6 +28,7 @@ export const WraperListCustomer = styled.div`
       padding: 1rem;
       font-weight: 500;
       font-size: 1.6rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       /* & > *:not(:last-child) {
         border-bottom: 1px solid var(--color-grey-dark-3);
       } */
