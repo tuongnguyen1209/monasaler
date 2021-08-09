@@ -39,6 +39,7 @@ const RouterSales = () => {
         <Route exact path="/chi-tiet-san-pham/:id" component={ProductInfo} />
         <Route exact path="/chi-tiet-don-hang/:id" component={OrderDetail} />
         <Route exact path="/dang-nhap" component={LoginPage} />
+        <Route path="*"></Route>
       </Switch>
 
       {/* {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (
