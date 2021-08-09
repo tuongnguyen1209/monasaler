@@ -9,6 +9,13 @@ const UserProvider = ({ children }) => {
   const [checkLogin, setCheckLogin] = useState(true);
 
   useEffect(() => {
+    console.log(localStorage.getItem("cart"));
+    if (localStorage.getItem("cart")) {
+      setCart(JSON.parse(localStorage.getItem("cart")));
+    }
+  }, []);
+
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       UserApis.getUserInfo()
@@ -25,6 +32,13 @@ const UserProvider = ({ children }) => {
     }
   }, [checkLogin]);
 
+  useEffect(() => {
+    updateCart();
+  }, [cart]);
+
+  const updateCart = () => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
   const addToCart = (product) => {
     const newCart = [...cart];
     newCart.push(product);
@@ -44,7 +58,6 @@ const UserProvider = ({ children }) => {
     setCheckLogin(false);
   };
 
-
   // const value = { user, cart, addToCart, login, logout, checkLogin };
 
   const changeSLCart = (ind, sl) => {
@@ -59,9 +72,9 @@ const UserProvider = ({ children }) => {
     setCart(newcart);
   };
 
-
   const clearCart = () => {
     setCart([]);
+    updateCart();
   };
 
   const value = {

@@ -142,9 +142,9 @@ const Products = () => {
           <Route
             exact
             path={`${match1.path}`}
-            render={({ match }) => {
+            render={() => {
               // setTitle("Sản phẩm");
-              console.log(match.params);
+
               return paintType1;
             }}
           />
@@ -152,7 +152,7 @@ const Products = () => {
           <Route
             exact
             path={`${match1.path}/:cate`}
-            render={({ match }) => {
+            render={() => {
               // setTitle(match.params.cate);
 
               return paintType2;
@@ -162,15 +162,7 @@ const Products = () => {
           <Route
             exact
             path={`${match1.path}/:cate1/:cate2`}
-            render={({ match }) => {
-              // const { cate1, cate2 } = match.params;
-
-              // setCurrentTypes({
-              //   loaicha: cate1,
-              //   loaicon: cate2,
-              // });
-
-              // setTitle(cate2);
+            render={() => {
               return (
                 <>
                   <form className="search">

@@ -22,7 +22,7 @@ export const WrapCamera = styled.div`
     video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: fill;
     }
   }
   .container {

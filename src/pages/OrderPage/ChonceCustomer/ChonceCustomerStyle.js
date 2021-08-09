@@ -15,7 +15,6 @@ export const WrapChonce = styled.div`
   .form-search {
     margin: 1.5rem 0;
     .search {
-      padding-top: 3rem;
       width: 100%;
       text-align: center;
 

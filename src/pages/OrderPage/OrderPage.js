@@ -55,11 +55,11 @@ const OrderPage = () => {
   };
 
   useEffect(() => {
-    if (cart.length > 0) {
+    if (cart.length > 0 && steper === 0) {
       setSteper(1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cart]);
 
   const totalCart = () => {
     let total = 0;

@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import { WrapForm } from "./FormStyle";
 import { NotificationManager } from "react-notifications";
 import { Link } from "react-router-dom";
+import Spinners from "../Spinners/Spinners";
 
 const Form = (props) => {
   const [values, setValues] = useState({
@@ -14,6 +15,7 @@ const Form = (props) => {
     address: "",
     job: "designer",
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (props.dataEdit) {
@@ -28,6 +30,7 @@ const Form = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (values.id) {
       CustomerssApis.update(values.id, values)
         .then((result) => {
@@ -37,37 +40,48 @@ const Form = (props) => {
         })
         .catch(() => {
           NotificationManager.error("Sửa thông tin khách hàng thất bại");
-          props.close();
+          // props.close();
+        })
+        .finally(() => {
+          setLoading(false);
         });
     } else {
       CustomerssApis.insert(values)
         .then((result) => {
           props.addNewCus(result.doc);
           NotificationManager.success("Thêm khách hàng thành công");
-          props.close();
+          if (props.close) props.close();
         })
         .catch(() => {
           NotificationManager.error("Thất Bại", "Đã có lỗi xảy ra", 1000);
-          props.close();
+          // props.close();
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
   return (
     <WrapForm>
       <div className="form__header">
-        <Link
-          to=""
-          className="close"
-          onClick={(e) => {
-            e.preventDefault();
-            props.close();
-          }}
-        >
-          &times;
-        </Link>
-        <p className="form__header-title">Thông tin khách hàng</p>
+        {props.close && (
+          <Link
+            to=""
+            className="close"
+            onClick={(e) => {
+              e.preventDefault();
+              props.close();
+            }}
+          >
+            &times;
+          </Link>
+        )}
+
+        <p className="form__header-title">
+          {props.title ? props.title : "Thông tin khách hàng"}
+        </p>
       </div>
-      <form className="form__content">
+      <form className="form__content" onSubmit={handleSubmit}>
         <input
           type="text"
           className="form__input"
@@ -100,10 +114,16 @@ const Form = (props) => {
           value={values.address || ""}
           onChange={handleChange}
         />
+
+        {loading && (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Spinners />
+          </div>
+        )}
+        <div className="btn-box">
+          <Button>Lưu</Button>
+        </div>
       </form>
-      <div className="btn-box">
-        <Button onClick={handleSubmit}>Lưu</Button>
-      </div>
     </WrapForm>
   );
 };
