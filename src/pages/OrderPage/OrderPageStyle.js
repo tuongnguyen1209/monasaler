@@ -24,29 +24,7 @@ export const WrapOderPage = styled.div`
       font-weight: 600;
     }
   }
-  .accordion-list {
-    margin-top: 1rem;
-  }
-  table,
-  td,
-  th {
-    border-bottom: 1px solid var(--color-grey-light-4);
-  }
-  td,
-  th {
-    padding: 0.5rem 0.5rem;
-    white-space: nowrap;
-  }
-  td > a {
-    color: var(--color-primary);
-  }
-  td {
-    text-align: center;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
+
   .orderinfo {
     width: 100%;
     list-style-type: none;
