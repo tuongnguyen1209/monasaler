@@ -39,6 +39,7 @@ export const WraperProductCode = styled.div`
       color: var(--color-light);
       font-weight: 600;
       padding: 1.5rem 2rem;
+      cursor: pointer;
 
       width: 50%;
       border: 1px solid var(--color-grey-dark-3);

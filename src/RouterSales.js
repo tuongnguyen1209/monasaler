@@ -9,7 +9,7 @@ import ProductCode from "./pages/ProductInfo/ProductCode/ProductCode";
 import ProductInfo from "./pages/ProductInfo/ProductInfo";
 import Products from "./pages/ProductsPage/Products";
 import ScanPage from "./pages/ScanPage/ScanPage";
-import logo from "./assets/img/logo-paint.png";
+// import logo from "./assets/img/logo-paint.png";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { UserContext } from "./contexts/UserContext";
 import OrderDetail from "./pages/OrderPage/OrderDetail/OrderDetail";
@@ -39,6 +39,7 @@ const RouterSales = () => {
         <Route exact path="/chi-tiet-san-pham/:id" component={ProductInfo} />
         <Route exact path="/chi-tiet-don-hang/:id" component={OrderDetail} />
         <Route exact path="/dang-nhap" component={LoginPage} />
+        <Route path="*"></Route>
       </Switch>
 
       {/* {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (
