@@ -1,7 +1,12 @@
 import styled from "styled-components";
 export const WrapListOrder = styled.div`
   margin-top: 1rem;
+  width: 100%;
+  overflow-x: auto;
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
   table,
   td,
   th {

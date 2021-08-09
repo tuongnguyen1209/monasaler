@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import barcodeImg from "../../../assets/img/barcode.jpg";
 import SubHeader from "../../../compoents/SubHeader/SubHeader";
 import { WraperProductCode } from "./ProductCodeStyle";
-import barcodeImg from "../../../assets/img/barcode.jpg";
-import { useHistory } from "react-router-dom";
-import { ProductApis } from "../../../apis/ProductApis";
-import { NotificationManager } from "react-notifications";
 
 const ProductCode = () => {
   const [barcode, setBarcode] = useState();

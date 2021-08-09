@@ -13,6 +13,7 @@ const UserProvider = ({ children }) => {
     if (localStorage.getItem("cart")) {
       setCart(JSON.parse(localStorage.getItem("cart")));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -30,10 +31,12 @@ const UserProvider = ({ children }) => {
     } else {
       setCheckLogin(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkLogin]);
 
   useEffect(() => {
     updateCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
   const updateCart = () => {

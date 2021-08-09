@@ -9,4 +9,7 @@ export const UserApis = {
   getUserInfo: async () => {
     return await axiosClient.put(`${url}/updateMe`);
   },
+  getOrderOfUser: (id, params) => {
+    return axiosClient.get(`${url}/${id}/orders`, { params });
+  },
 };
