@@ -8,7 +8,7 @@ import Form from "../../compoents/Form/Form";
 
 const ListCustomer = () => {
   const [dataCustomer, setDataCustomer] = useState([]);
-  const [query, setQuery] = useState({ limit: 20, page: 1 });
+  const query = { limit: 20, page: 1 };
   const [dataEdit, setDataEdit] = useState({});
 
   useEffect(() => {
@@ -23,6 +23,7 @@ const ListCustomer = () => {
       });
       setDataCustomer(customers);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleGetEdit = (cus) => {

@@ -16,6 +16,7 @@ const ScanPage = () => {
     } else {
       console.log("sai url");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const checkData = () => {

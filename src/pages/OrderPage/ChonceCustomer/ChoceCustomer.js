@@ -99,6 +99,9 @@ const ChoceCustomer = (props) => {
   );
 };
 
-ChoceCustomer.propTypes = {};
+ChoceCustomer.propTypes = {
+  chonceUser: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+};
 
 export default ChoceCustomer;

@@ -3,7 +3,7 @@ import { WraperLogin } from "./LoginStyle";
 import bg from "./../../assets/img/login.jpg";
 import logo from "./../../assets/img/logo-paint.png";
 import { UserApis } from "../../apis/UserApis";
-import { useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { NotificationManager } from "react-notifications";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -11,8 +11,10 @@ const LoginPage = () => {
   const [values, setValues] = useState({ username: "", password: "" });
   const [showRemember, setShowRemember] = useState(false);
   const [showPass, setShowPass] = useState(false);
-  const { login } = useContext(UserContext);
+  const { login, checkLogin } = useContext(UserContext);
   const history = useHistory();
+
+  if (checkLogin) return <Redirect to="/" />;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,14 +91,16 @@ const LoginPage = () => {
             </div>
             <div className="form-group">
               <input type="submit" value="Đăng nhập" className="btn" />
-              <a
+              <Link
+                to=""
                 className="qmk"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   setShowRemember(true);
                 }}
               >
                 Quên mật khẩu?
-              </a>
+              </Link>
             </div>
           </form>
         )}
@@ -113,14 +117,15 @@ const LoginPage = () => {
             </div>
             <div className="form-group">
               <input type="submit" value="Lấy mật khẩu" className="btn" />
-              <a
+              <Link
                 className="qmk"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   setShowRemember(false);
                 }}
               >
                 Quay lại
-              </a>
+              </Link>
             </div>
           </form>
         )}
