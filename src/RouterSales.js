@@ -42,7 +42,7 @@ const RouterSales = () => {
         <Route exact path="/dang-nhap" component={LoginPage} />
       </Switch>
 
-      {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (
+      {/* {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (
         <div
           style={{
             width: "100%",
@@ -53,7 +53,7 @@ const RouterSales = () => {
         >
           <img src={logo} style={{ width: "15%" }} />
         </div>
-      )}
+      )} */}
       {location.pathname !== "/scan" && location.pathname !== "/dang-nhap" && (
         <Navigation />
       )}

@@ -36,7 +36,7 @@ const OrderDetail = () => {
         </div>
 
         <div className="product">
-          <div className="detail-order__box">
+          <div className="detail-order__box none">
             <span className="detail-order__icon">
               <i className="fas fa-box-open" />
             </span>

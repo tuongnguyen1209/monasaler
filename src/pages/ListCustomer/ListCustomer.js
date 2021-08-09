@@ -12,28 +12,40 @@ const ListCustomer = () => {
   const [dataEdit, setDataEdit] = useState({});
 
   useEffect(() => {
-    let newData = [];
     CustomerssApis.getAll(query).then((result) => {
-      newData = result.data.docs;
-      setDataCustomer(newData);
+      const customers = result.data.docs.map((customerData) => {
+        return {
+          id: customerData.id,
+          fullname: customerData.fullname,
+          phone: customerData.phone,
+          email: customerData.email,
+        };
+      });
+      setDataCustomer(customers);
     });
   }, []);
 
-  const updateCus = (newCus, index) => {
-    const newDataCus = [...dataCustomer];
-    if (index) {
-      newDataCus[index] = newCus;
-    } else {
-      newDataCus.push(newCus);
-    }
-    setDataCustomer(newDataCus);
-  };
-
-  const handleEdit = (cus) => {
+  const handleGetEdit = (cus) => {
     setDataEdit(cus);
   };
-  console.log(dataEdit);
-  const customer = dataCustomer.map((el, index) => {
+
+  const handleUpdateListCus = (newCus) => {
+    let newListCus = [...dataCustomer];
+
+    for (let i in newListCus) {
+      if (newListCus[i].id === newCus.id) {
+        newListCus[i] = newCus;
+      }
+    }
+    setDataCustomer(newListCus);
+  };
+
+  const handleAddNewCus = (newCus) => {
+    const newListCus = [newCus, ...dataCustomer];
+    setDataCustomer(newListCus);
+  };
+
+  const customer = dataCustomer.map((el) => {
     return (
       <div key={el.id} className="customer">
         <div className="customer__box">
@@ -42,7 +54,7 @@ const ListCustomer = () => {
               <span className="customer__box--edit">
                 <i
                   onClick={() => {
-                    handleEdit(el);
+                    handleGetEdit(el);
                   }}
                   className="fas fa-user-edit customer__box--edit-icon"
                 />
@@ -52,8 +64,7 @@ const ListCustomer = () => {
           >
             {(close) => (
               <Form
-                updateCus={updateCus}
-                index={index}
+                updateList={handleUpdateListCus}
                 dataEdit={dataEdit}
                 close={close}
               />
@@ -96,7 +107,7 @@ const ListCustomer = () => {
         }
         modal
       >
-        {(close) => <Form updateCus={updateCus} close={close} />}
+        {(close) => <Form addNewCus={handleAddNewCus} close={close} />}
       </Popup>
     </WraperListCustomer>
   );
