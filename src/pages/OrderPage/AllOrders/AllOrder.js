@@ -133,11 +133,10 @@ const AllOrder = () => {
       </div>
 
       <Spinners show={loading} />
-
+      {listOrders.length > 0 && <h4>Kết quả tìm được</h4>}
       <div className="list-order">
         {listOrders.length > 0 && (
           <>
-            <h4>Kết quả tìm được</h4>
             {/* <Accordion title="ngay"> */}
             <table>
               <thead>
