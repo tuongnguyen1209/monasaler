@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import { ProductApis } from "../../apis/ProductApis";
 import Img from "../../assets/img/matex_sealer.jpg";
 import AddColorForm from "../../compoents/AddColorForm/AddColorForm";
+import Spinners from "../../compoents/Spinners/Spinners";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import ChangeColorText from "../../Hooks/use_ChageColorText";
 import { formatColor, formatPrice } from "../../Hooks/use_Formater";
@@ -19,14 +20,19 @@ const ProductInfo = () => {
   const [errorId, setErrorId] = useState(false);
   const { id } = useParams();
   const [kw, setKW] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     ProductApis.get(id)
       .then((result) => {
         setProduct(result.data.product);
       })
       .catch(() => {
         setErrorId(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [id]);
 
@@ -73,70 +79,76 @@ const ProductInfo = () => {
         </p>
       ) : (
         <div className="product">
-          <div className="product__name">
-            <h1>{product.name}</h1>
-          </div>
-          <div className="product__img">
-            <img src={product.image ? product.image : Img} alt="" />
-          </div>
-          <div className="product__details">
-            <ul className="info">
-              <li>
-                <span>Giá:</span>
-                <strong>{formatPrice(product.lastestPrice)}</strong>
-              </li>
-              <li>
-                <span>Đơn vị:</span>
-                <strong>{product.unit}</strong>
-              </li>
-              <li>
-                <span>Bề mặt:</span>
-                <strong>{product.surfaces.join(",")}</strong>
-              </li>
-              <li>
-                <span>Bề mặt sau sơn:</span>
-                <strong>{product.surfacegloss.join(",")}</strong>
-              </li>
-              <li>
-                <span>Loại:</span>
-                <strong>{product.types.join(",")}</strong>
-              </li>
-            </ul>
-            <div className="titlecl">
-              <h3>Màu sắc</h3>
-              <input
-                placeholder="Tìm kiếm tên màu ... "
-                onChange={handleChangeText}
-              />
-              <p>Nhấp vào màu để lập hóa đơn</p>
-            </div>
-            <div className="colors">
-              {product.colors &&
-                filterColter(product.colors).map((el, index) => (
-                  <div className="color" key={`mau-${index}`}>
-                    <WrapColor
-                      dataColor={formatColor(el.color.colorcode)}
-                      textcolor={ChangeColorText(
-                        formatColor(el.color.colorcode)
-                      )}
-                    >
-                      <Popup
-                        trigger={
-                          <div className="btn-box">
-                            {el.color.name} - {el.inventory}
-                          </div>
-                        }
-                        modal
-                      >
-                        {(close) => (
-                          <AddColorForm product={product} color={el} />
-                        )}
-                      </Popup>
-                    </WrapColor>
-                  </div>
-                ))}
-            </div>
-          </div>
+          <Spinners show={loading} />
+
+          {!loading && (
+            <>
+              <div className="product__name">
+                <h1>{product.name}</h1>
+              </div>
+              <div className="product__img">
+                <img src={product.image ? product.image : Img} alt="" />
+              </div>
+              <div className="product__details">
+                <ul className="info">
+                  <li>
+                    <span>Giá:</span>
+                    <strong>{formatPrice(product.lastestPrice)}</strong>
+                  </li>
+                  <li>
+                    <span>Đơn vị:</span>
+                    <strong>{product.unit}</strong>
+                  </li>
+                  <li>
+                    <span>Bề mặt:</span>
+                    <strong>{product.surfaces.join(",")}</strong>
+                  </li>
+                  <li>
+                    <span>Bề mặt sau sơn:</span>
+                    <strong>{product.surfacegloss.join(",")}</strong>
+                  </li>
+                  <li>
+                    <span>Loại:</span>
+                    <strong>{product.types.join(",")}</strong>
+                  </li>
+                </ul>
+                <div className="titlecl">
+                  <h3>Màu sắc</h3>
+                  <input
+                    placeholder="Tìm kiếm tên màu ... "
+                    onChange={handleChangeText}
+                  />
+                  <p>Nhấp vào màu để lập hóa đơn</p>
+                </div>
+                <div className="colors">
+                  {product.colors &&
+                    filterColter(product.colors).map((el, index) => (
+                      <div className="color" key={`mau-${index}`}>
+                        <WrapColor
+                          dataColor={formatColor(el.color.colorcode)}
+                          textcolor={ChangeColorText(
+                            formatColor(el.color.colorcode)
+                          )}
+                        >
+                          <Popup
+                            trigger={
+                              <div className="btn-box">
+                                {el.color.name} - {el.inventory}
+                              </div>
+                            }
+                            modal
+                          >
+                            {(close) => (
+                              <AddColorForm product={product} color={el} />
+                            )}
+                          </Popup>
+                        </WrapColor>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
     </WrapProductInfo>

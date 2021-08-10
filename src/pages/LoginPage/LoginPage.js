@@ -6,6 +6,7 @@ import { UserApis } from "../../apis/UserApis";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { NotificationManager } from "react-notifications";
 import { UserContext } from "../../contexts/UserContext";
+import Spinners from "../../compoents/Spinners/Spinners";
 
 const LoginPage = () => {
   const [values, setValues] = useState({ username: "", password: "" });
@@ -13,6 +14,7 @@ const LoginPage = () => {
   const [showPass, setShowPass] = useState(false);
   const { login, checkLogin } = useContext(UserContext);
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   if (checkLogin) return <Redirect to="/" />;
 
@@ -25,6 +27,7 @@ const LoginPage = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     UserApis.login(values)
       .then((result) => {
         login(result.data);
@@ -37,6 +40,9 @@ const LoginPage = () => {
           "Sai username hoặc mật khẩu",
           1000
         );
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -89,8 +95,12 @@ const LoginPage = () => {
                 </span>
               </div>
             </div>
+            <Spinners show={loading} />
+
             <div className="form-group">
-              <input type="submit" value="Đăng nhập" className="btn" />
+              {!loading && (
+                <input type="submit" value="Đăng nhập" className="btn" />
+              )}
               <Link
                 to=""
                 className="qmk"
@@ -118,6 +128,7 @@ const LoginPage = () => {
             <div className="form-group">
               <input type="submit" value="Lấy mật khẩu" className="btn" />
               <Link
+                to=""
                 className="qmk"
                 onClick={(e) => {
                   e.preventDefault();

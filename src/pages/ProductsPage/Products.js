@@ -9,6 +9,7 @@ import {
 import { ProductApis } from "../../apis/ProductApis";
 import Img from "../../assets/img/matex_sealer.jpg";
 import PaintType from "../../compoents/PaintType/PaintType";
+import Spinners from "../../compoents/Spinners/Spinners";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import { WraperProduct } from "./ProductsStyle";
 
@@ -24,10 +25,12 @@ const Products = () => {
   });
   const [show, setShow] = useState(true);
   const [title, setTitle] = useState("Sản phẩm");
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
+
   useEffect(() => {
     const path = location.pathname.split("/");
-    console.log(path);
+
     if (path.length === 4) {
       setTitle(path[3]);
       // setCurrentTypes({
@@ -47,9 +50,17 @@ const Products = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    ProductApis.getTypes().then((dataType) => {
-      setDataKindOFPaint(dataType.data.docs);
-    });
+    setLoading(true);
+    ProductApis.getTypes()
+      .then((dataType) => {
+        setDataKindOFPaint(dataType.data.docs);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -138,6 +149,7 @@ const Products = () => {
         <h1 className={`body__text ${show ? "" : "text-hidden"}`}>
           Tra cứu sản phẩm
         </h1>
+        <Spinners show={loading} />
         <Switch>
           <Route
             exact

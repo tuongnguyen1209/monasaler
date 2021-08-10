@@ -57,6 +57,10 @@ export const WraperLogin = styled.div`
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
           color: white;
           font-size: 1.8rem;
+          ::placeholder {
+            color: white;
+            opacity: 0.6;
+          }
         }
         input.btn {
           margin: auto;

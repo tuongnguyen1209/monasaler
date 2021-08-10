@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const WrapSnip = styled.div`
   background-color: transparent;
@@ -17,8 +18,20 @@ const WrapSnip = styled.div`
   height: 5rem;
 `;
 
-const Spinners = () => {
-  return <WrapSnip></WrapSnip>;
+const Spinners = (props) => {
+  const { show } = props;
+  return (
+    <>
+      {show && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <WrapSnip></WrapSnip>
+        </div>
+      )}
+    </>
+  );
+};
+Spinners.prototype = {
+  show: PropTypes.bool.isRequired,
 };
 
 export default Spinners;

@@ -9,7 +9,6 @@ const UserProvider = ({ children }) => {
   const [checkLogin, setCheckLogin] = useState(true);
 
   useEffect(() => {
-    console.log(localStorage.getItem("cart"));
     if (localStorage.getItem("cart")) {
       setCart(JSON.parse(localStorage.getItem("cart")));
     }

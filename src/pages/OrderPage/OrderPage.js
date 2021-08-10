@@ -7,6 +7,7 @@ import Button from "../../compoents/Button/Button";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import Tabs from "../../compoents/Tabs/Tabs";
 import { UserContext } from "../../contexts/UserContext";
+import AllOrder from "./AllOrders/AllOrder";
 import CartItem from "./CartItem/CartItem";
 import ChoceCustomer from "./ChonceCustomer/ChoceCustomer";
 import ListOrderTam from "./ListOrder/ListOrderTam";
@@ -113,10 +114,6 @@ const OrderPage = () => {
                     <span>Số Điện Thoại:</span>
                     <strong>{customer.phone}</strong>
                   </li>
-                  {/* <li>
-                    <span>Địa chỉ:</span>
-                    <strong></strong>
-                  </li> */}
                   <div className="line"></div>
                   <li>
                     <span>Tổng hóa đơn:</span>
@@ -148,7 +145,7 @@ const OrderPage = () => {
       {tabs[1].active && <ListOrderTam />}
       {tabs[2].active && (
         <>
-          <p>abc</p>
+          <AllOrder />
         </>
       )}
     </WrapOderPage>

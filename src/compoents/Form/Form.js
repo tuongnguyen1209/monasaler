@@ -114,12 +114,8 @@ const Form = (props) => {
           value={values.address || ""}
           onChange={handleChange}
         />
+        <Spinners show={loading} />
 
-        {loading && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Spinners />
-          </div>
-        )}
         <div className="btn-box">
           <Button>Lưu</Button>
         </div>

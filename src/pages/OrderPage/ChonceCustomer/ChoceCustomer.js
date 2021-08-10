@@ -141,11 +141,7 @@ const ChoceCustomer = (props) => {
             </Button>
           </div>
         )}
-        {loading && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Spinners />
-          </div>
-        )}
+        <Spinners show={loading} />
       </div>
     </WrapChonce>
   );

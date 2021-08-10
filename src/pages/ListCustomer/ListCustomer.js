@@ -5,24 +5,34 @@ import SubHeader from "../../compoents/SubHeader/SubHeader";
 import Popup from "reactjs-popup";
 import { WraperListCustomer } from "./ListCustomerStyle";
 import Form from "../../compoents/Form/Form";
+import Spinners from "../../compoents/Spinners/Spinners";
 
 const ListCustomer = () => {
   const [dataCustomer, setDataCustomer] = useState([]);
   const query = { limit: 20, page: 1 };
   const [dataEdit, setDataEdit] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    CustomerssApis.getAll(query).then((result) => {
-      const customers = result.data.docs.map((customerData) => {
-        return {
-          id: customerData.id,
-          fullname: customerData.fullname,
-          phone: customerData.phone,
-          email: customerData.email,
-        };
+    setLoading(true);
+    CustomerssApis.getAll(query)
+      .then((result) => {
+        const customers = result.data.docs.map((customerData) => {
+          return {
+            id: customerData.id,
+            fullname: customerData.fullname,
+            phone: customerData.phone,
+            email: customerData.email,
+          };
+        });
+        setDataCustomer(customers);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      setDataCustomer(customers);
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -100,6 +110,7 @@ const ListCustomer = () => {
       </form>
 
       <div className="list-customer">{customer}</div>
+      <Spinners show={loading} />
       <Popup
         trigger={
           <div className="btn-box">
