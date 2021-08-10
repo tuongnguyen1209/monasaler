@@ -93,11 +93,11 @@ const StatisticPage = () => {
         setLoading(false);
       });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       setShow(false);
       setErr("");
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user._id, date]);
 
   useEffect(() => {
@@ -119,6 +119,7 @@ const StatisticPage = () => {
         limit: 50,
       });
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabs]);
 
   useEffect(() => {
@@ -133,6 +134,7 @@ const StatisticPage = () => {
       },
     ]);
     getOrderFromDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listOrder]);
 
   const getdate = (value = null) => {
