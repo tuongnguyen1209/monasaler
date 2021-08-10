@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { UserApis } from "../../../apis/UserApis";
 import Spinners from "../../../compoents/Spinners/Spinners";
 import { UserContext } from "../../../contexts/UserContext";
-import { formatDateFull, formatPrice } from "../../../Hooks/use_Formater";
+import {
+  FormatDate1,
+  formatDateFull,
+  formatPrice,
+} from "../../../Hooks/use_Formater";
 import { WrapAllOrder } from "./AllOrderStyle";
-
-const getDate = (d = new Date()) => {
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-};
 
 const AllOrder = () => {
   const [cateShow, setCateShow] = useState(0);
@@ -82,8 +82,8 @@ const AllOrder = () => {
     let lastDay = new Date(y, m + 1, 0);
 
     const newDate = {
-      "createAt[gte]": getDate(firstDay),
-      "createAt[lte]": getDate(lastDay),
+      "createAt[gte]": FormatDate1(firstDay),
+      "createAt[lte]": FormatDate1(lastDay),
     };
     setDate(newDate);
   };

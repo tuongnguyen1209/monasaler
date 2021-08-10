@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import { formatPrice } from "../../../src/Hooks/use_Formater";
 import OrdersApis from "../../apis/OrdersApi";
 import Button from "../../compoents/Button/Button";
+import Spinners from "../../compoents/Spinners/Spinners";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import Tabs from "../../compoents/Tabs/Tabs";
 import { UserContext } from "../../contexts/UserContext";
@@ -22,6 +23,7 @@ const OrderPage = () => {
   const [steper, setSteper] = useState(0);
   const { cart, user, clearCart } = useContext(UserContext);
   const [customer, setCustomer] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const chonceUser = (u) => {
     setCustomer(u);
@@ -60,7 +62,7 @@ const OrderPage = () => {
         quantity: element.quantity,
       });
     }
-
+    setLoading(true);
     OrdersApis.createOrder(order)
       .then((result) => {
         console.log(result);
@@ -70,15 +72,20 @@ const OrderPage = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return (
     <WrapOderPage>
       <SubHeader> Đơn Hàng</SubHeader>
-      <span className="note-text">
-        (*) Kích vào mã đơn hàng để xem chi tiết
-      </span>
+      {!tabs[0].active && (
+        <span className="note-text">
+          (*) Kích vào mã đơn hàng để xem chi tiết
+        </span>
+      )}
       <Tabs tabs={tabs} setTabs={setTabs} />
 
       {tabs[0].active && (
@@ -135,7 +142,11 @@ const OrderPage = () => {
                     </strong>
                   </li>
                 </ul>
-                <Button onClick={confirmOrder}>Chuyển hóa đơn</Button>
+
+                <Spinners show={loading} />
+                {!loading && (
+                  <Button onClick={confirmOrder}>Chuyển hóa đơn</Button>
+                )}
               </>
             )}
           </div>

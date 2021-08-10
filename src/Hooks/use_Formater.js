@@ -28,3 +28,6 @@ export const formatDate = (str) => {
     dateStyle: "full",
   }).format(date);
 };
+export const FormatDate1 = (d = new Date()) => {
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+};

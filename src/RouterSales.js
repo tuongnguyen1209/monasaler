@@ -13,6 +13,7 @@ import ScanPage from "./pages/ScanPage/ScanPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { UserContext } from "./contexts/UserContext";
 import OrderDetail from "./pages/OrderPage/OrderDetail/OrderDetail";
+import StatisticPage from "./pages/StatisticPage/StatisticPage";
 
 const RouterSales = () => {
   const location = useLocation();
@@ -33,11 +34,10 @@ const RouterSales = () => {
         <Route strict path="/scan" component={ScanPage} />
         <Route exact path="/nhap-ma-san-pham" component={ProductCode} />
         <Route exact path="/khach-hang" component={ListCustomer} />
-
         <Route exact path="/don-hang" component={OrderPage} />
-
         <Route exact path="/chi-tiet-san-pham/:id" component={ProductInfo} />
         <Route exact path="/chi-tiet-don-hang/:id" component={OrderDetail} />
+        <Route exact path="/thong-ke" component={StatisticPage} />
         <Route exact path="/dang-nhap" component={LoginPage} />
         <Route path="*"></Route>
       </Switch>
