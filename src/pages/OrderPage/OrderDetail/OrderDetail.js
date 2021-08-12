@@ -7,11 +7,13 @@ import { useHistory, useParams } from "react-router-dom";
 import OrdersApis from "../../../apis/OrdersApi";
 import { formatDate, formatPrice } from "../../../Hooks/use_Formater";
 import { CustomerssApis } from "../../../apis/CustomerApis";
+import Spinners from "../../../compoents/Spinners/Spinners";
 const OrderDetail = () => {
   const { id } = useParams();
   const [order, setOrder] = useState({});
   const [customer, setCustomer] = useState({});
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     OrdersApis.getOrder(id)
@@ -28,6 +30,7 @@ const OrderDetail = () => {
 
   const deleteThisOrder = () => {
     if (window.confirm("Bạn có chắc muốn hủy hóa đơn?")) {
+      setLoading(true);
       OrdersApis.delteOrder(id)
         .then((result) => {
           if (result.message === "Success") {
@@ -37,6 +40,9 @@ const OrderDetail = () => {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
     return false;
@@ -131,7 +137,11 @@ const OrderDetail = () => {
         {order.status === "Đơn hàng tạm" && (
           <>
             <div>
-              <Button onClick={deleteThisOrder}>Hủy Đơn Hàng</Button>
+              <Spinners show={loading} />
+
+              {!loading && (
+                <Button onClick={deleteThisOrder}>Hủy Đơn Hàng</Button>
+              )}
             </div>
 
             <div style={{ margin: "1rem 0" }}>
