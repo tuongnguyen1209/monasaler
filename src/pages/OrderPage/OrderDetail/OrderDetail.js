@@ -33,10 +33,7 @@ const OrderDetail = () => {
       setLoading(true);
       OrdersApis.delteOrder(id)
         .then((result) => {
-          if (result.message === "Success") {
-            history.push("/don-hang");
-            return true;
-          }
+          history.push("/don-hang");
         })
         .catch((err) => {
           console.log(err);
