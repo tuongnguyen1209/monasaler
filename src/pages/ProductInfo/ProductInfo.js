@@ -133,7 +133,8 @@ const ProductInfo = () => {
                           <Popup
                             trigger={
                               <div className="btn-box">
-                                {el.color.name} - {el.inventory}
+                                {el.color.name} -{" "}
+                                {el.inventory > 0 ? el.inventory : "hết hàng"}
                               </div>
                             }
                             modal

@@ -56,35 +56,43 @@ const AddColorForm = (props) => {
           {/* <span className="tonkho">{color.inventory}</span> */}
         </div>
 
-        <div className="inputform">
-          <button
-            onClick={() => {
-              changeSl1(-1);
-            }}
-          >
-            <i className="fas fa-minus"></i>
-          </button>
-          <input type="number" min="1" value={sl} onChange={changeSl} />
-          <button
-            onClick={() => {
-              changeSl1(1);
-            }}
-          >
-            <i className="fas fa-plus"></i>
-          </button>
-        </div>
-        <div className="ifo">
-          <span>Đơn Giá: </span>
-          <strong>{formatPrice(product.lastestPrice)}</strong>
-        </div>
-        <div className="ifo">
-          <span>Thành Tiền: </span>
-          <strong>{formatPrice(product.lastestPrice * sl)}</strong>
-        </div>
+        {color.inventory > 0 ? (
+          <>
+            <div className="inputform">
+              <button
+                onClick={() => {
+                  changeSl1(-1);
+                }}
+              >
+                <i className="fas fa-minus"></i>
+              </button>
+              <input type="number" min="1" value={sl} onChange={changeSl} />
+              <button
+                onClick={() => {
+                  changeSl1(1);
+                }}
+              >
+                <i className="fas fa-plus"></i>
+              </button>
+            </div>
+            <div className="ifo">
+              <span>Đơn Giá: </span>
+              <strong>{formatPrice(product.lastestPrice)}</strong>
+            </div>
+            <div className="ifo">
+              <span>Thành Tiền: </span>
+              <strong>{formatPrice(product.lastestPrice * sl)}</strong>
+            </div>{" "}
+          </>
+        ) : (
+          "Sản phẩm này đã hết hàng"
+        )}
       </div>
-      <div className="wrapAction">
-        <Button onClick={handleAddTocart}>Thêm</Button>
-      </div>
+      {color.inventory > 0 && (
+        <div className="wrapAction">
+          <Button onClick={handleAddTocart}>Thêm</Button>
+        </div>
+      )}
     </WrapAddCart>
   );
 };
