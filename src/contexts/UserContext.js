@@ -20,7 +20,7 @@ const UserProvider = ({ children }) => {
     if (token) {
       UserApis.getUserInfo()
         .then((result) => {
-          setUser(result.data.user);
+          setUser(result.data.updatedUser);
           setCheckLogin(true);
         })
         .catch((err) => {

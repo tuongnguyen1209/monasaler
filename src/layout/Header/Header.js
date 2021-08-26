@@ -9,12 +9,16 @@ const Header = () => {
   return (
     <WraperHeader>
       <div className="user">
-        <img
-          src={user.image ? user.image : avt}
-          alt="User avt"
-          className="user__avt"
-        />
-        <span className="user__user-name">Xin Chào, {user.fullname}</span>
+        {user && (
+          <>
+            <img
+              src={user.image ? user.image : avt}
+              alt="User avt"
+              className="user__avt"
+            />
+            <span className="user__user-name">Xin Chào, {user.fullname}</span>
+          </>
+        )}
       </div>
       <div className="box-center">
         {/* <p className="box-center__text">Mona Paint, xin chào! </p> */}
