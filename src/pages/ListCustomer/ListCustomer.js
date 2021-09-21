@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { CustomerssApis } from "../../apis/CustomerApis";
-import Button from "../../compoents/Button/Button";
-import SubHeader from "../../compoents/SubHeader/SubHeader";
+import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
-import { WraperListCustomer } from "./ListCustomerStyle";
+import { CustomerssApis } from "../../apis/CustomerApis";
 import Form from "../../compoents/Form/Form";
 import Spinners from "../../compoents/Spinners/Spinners";
+import SubHeader from "../../compoents/SubHeader/SubHeader";
+import { WraperListCustomer } from "./ListCustomerStyle";
 
 const ListCustomer = () => {
   const [dataCustomer, setDataCustomer] = useState([]);
-  const query = { limit: 20, page: 1 };
+  const query = { limit: 50, page: 1 };
   const [dataEdit, setDataEdit] = useState({});
   const [loading, setLoading] = useState(false);
+  const [kw, setKw] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -83,9 +83,7 @@ const ListCustomer = () => {
           </Popup>
 
           <p className="customer__name">{el.fullname}</p>
-          <p className="customer__address">
-            184 Phan Đình Phùng, p.18, Q.Phú Nhuận
-          </p>
+          <p className="customer__address">{el.address}</p>
           <p className="customer__email">{el.email}</p>
           <p className="customer__phone">ĐT: {el.phone}</p>
         </div>
@@ -93,16 +91,41 @@ const ListCustomer = () => {
     );
   });
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    CustomerssApis.getAll({ ...query, phone: kw })
+      .then((result) => {
+        const customers = result.data.docs.map((customerData) => {
+          return {
+            id: customerData.id,
+            fullname: customerData.fullname,
+            phone: customerData.phone,
+            email: customerData.email,
+          };
+        });
+        setDataCustomer(customers);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <WraperListCustomer>
       <div className="subheader">
         <SubHeader>Khách hàng</SubHeader>
       </div>
-      <form className="search">
+      <form className="search" onSubmit={handleSearch}>
         <input
           type="text"
           className="search__input"
           placeholder="Tìm kiếm...."
+          value={kw}
+          onChange={(e) => setKw(e.target.value)}
         />
         <button className="search__button">
           <i className="fas fa-search search__icon"></i>
@@ -111,10 +134,13 @@ const ListCustomer = () => {
 
       <div className="list-customer">{customer}</div>
       <Spinners show={loading} />
+
       <Popup
         trigger={
           <div className="btn-box">
-            <Button>Thêm khách hàng</Button>
+            <button>
+              <i className="fas fa-plus"></i>
+            </button>
           </div>
         }
         modal

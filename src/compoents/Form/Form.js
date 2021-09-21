@@ -13,7 +13,7 @@ const Form = (props) => {
     email: "",
     phone: "",
     address: "",
-    job: "designer",
+    job: "",
   });
   const [loading, setLoading] = useState(false);
 

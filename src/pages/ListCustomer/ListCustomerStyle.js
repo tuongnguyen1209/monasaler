@@ -99,8 +99,16 @@ export const WraperListCustomer = styled.div`
     }
   }
   .btn-box {
-    margin-top: 2rem;
-    text-align: center;
+    position: fixed;
+    bottom: 15%;
+    right: 30px;
+    button {
+      padding: 15px;
+      border-radius: 50%;
+      border: none;
+      background-color: var(--color-primary);
+      color: wheat;
+    }
   }
 
   @media screen and (max-width: 767px) {

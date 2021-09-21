@@ -24,10 +24,10 @@ const Header = () => {
         {/* <p className="box-center__text">Mona Paint, xin chào! </p> */}
       </div>
       <div className="box-right">
-        <div className="box-right__icon">
+        {/* <div className="box-right__icon">
           <i className="far fa-bell box-right__icon2"></i>
           <span className="box-right__notification">9</span>
-        </div>
+        </div> */}
         <div className="box-right__icon" onClick={logout}>
           <i className="fas fa-sign-out-alt box-right__icon2"></i>
         </div>

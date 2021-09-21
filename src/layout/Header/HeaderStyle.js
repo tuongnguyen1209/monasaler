@@ -13,6 +13,7 @@ export const WraperHeader = styled.header`
     margin-left: 1rem;
     padding: 0.5rem;
     border-radius: 2rem;
+    user-select: none;
     &__avt {
       width: 4.75rem;
       border: 1px solid var(--color-grey-dark-3);
