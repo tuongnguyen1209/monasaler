@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const WrapSnip = styled.div`
   background-color: transparent;
   background-image: url('data:image/svg+xml,\
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -20 40 40">\
+<svg xmlns="https://www.w3.org/2000/svg" viewBox="-20 -20 40 40">\
 <style> /* ...YO DAWG... */ circle { animation: 4s a infinite linear, 3s o infinite linear; }\
 @keyframes a {from{stroke-dasharray:100 0}50%25{stroke-dasharray:0 100}to{stroke-dasharray:100 0}}\
 @keyframes o {from{stroke-dashoffset:75}to{stroke-dashoffset:375}}\
