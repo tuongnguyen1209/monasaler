@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import bg from "../../assets/img/bg-login.jpg";
 
 export const WraperLogin = styled.div`
   width: 100%;
@@ -9,6 +10,8 @@ export const WraperLogin = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: 2rem 0;
+  background: url(${bg});
+  background-size: auto 100%;
   img.bg {
     position: absolute;
     width: 100%;
@@ -28,7 +31,7 @@ export const WraperLogin = styled.div`
     }
   }
   .wrap {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.65);
     color: white;
     padding: 1.5rem;
     border-radius: 0.5rem;

@@ -5,7 +5,7 @@ export const WrapAllOrder = styled.div`
     margin-top: 1rem;
     width: 100%;
     .form-group {
-      padding: 0.5rem;
+      padding: 1rem;
       label {
         display: block;
         width: 100%;
@@ -50,5 +50,8 @@ export const WrapAllOrder = styled.div`
       border-collapse: collapse;
       width: 100%;
     }
+  }
+  h4 {
+    text-align: center;
   }
 `;

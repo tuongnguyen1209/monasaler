@@ -1,12 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   CartesianGrid,
-  Cell,
   Legend,
   Line,
   LineChart,
-  Pie,
-  PieChart,
   Tooltip,
   XAxis,
   YAxis,
@@ -30,9 +27,6 @@ const StatisticPage = () => {
   const [loading, setLoading] = useState(false);
   const [tabs, setTabs] = useState([
     { id: 1, name: "Thống kê tháng hiện tại", active: true },
-    { id: 2, name: "Thống kê theo ngày", active: false },
-    { id: 3, name: "Thống kê theo tháng", active: false },
-    { id: 4, name: "Thống kê trong năm", active: false },
   ]);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState({
@@ -41,21 +35,6 @@ const StatisticPage = () => {
     limit: 50,
   });
   const [err, setErr] = useState("");
-
-  const [data, setData] = useState([
-    {
-      name: "Thành công",
-      value: 0,
-    },
-    {
-      name: "Thất Bại",
-      value: 0,
-    },
-    {
-      name: "Đơn Tạm",
-      value: 0,
-    },
-  ]);
 
   useEffect(() => {
     if (
@@ -74,14 +53,6 @@ const StatisticPage = () => {
           setErr("");
 
           if (tabs[0].active) setTitle(`trong tháng ${getmonth() + 1}`);
-          else if (tabs[1].active)
-            setTitle(
-              `từ ngày ${date["createAt[lte]"]} đến ngày ${date["createAt[gte]"]}`
-            );
-          else if (tabs[2].active)
-            setTitle(`trong tháng ${date["createAt[lte]"].split("-")[1]}`);
-          else if (tabs[3].active)
-            setTitle(`trong năm ${date["createAt[lte]"].split("-")[0]}`);
         } else {
           setErr("Không có đơn hàng phù hợp");
         }
@@ -122,21 +93,6 @@ const StatisticPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabs]);
 
-  useEffect(() => {
-    setData([
-      {
-        name: "Tổng Đơn hàng thành công",
-        value: getDonThanhCong().dem,
-      },
-      {
-        name: "Tổng Đơn hàng thất Bại",
-        value: listOrder.length - getDonThanhCong().dem,
-      },
-    ]);
-    getOrderFromDate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listOrder]);
-
   const getdate = (value = null) => {
     let date;
     if (value) date = new Date(value);
@@ -168,57 +124,38 @@ const StatisticPage = () => {
     return { dem, doanhthu };
   };
 
-  const colors = ["#2ecc71", "#e74c3c", "#1abc9c", "#9b59b6"];
-
   const getmonth = () => {
     return new Date().getMonth();
   };
 
-  const changeDate = (e) => {
-    const { name, value } = e.target;
-    const newDate = { ...date };
-    newDate[name] = value;
-    setDate(newDate);
-  };
+  // const changeDate = (e) => {
+  //   const { name, value } = e.target;
+  //   const newDate = { ...date };
+  //   newDate[name] = value;
+  //   setDate(newDate);
+  // };
 
-  const changemonth = (event) => {
-    const { value } = event.target;
-    setDate(getdate(value));
-  };
+  // const changemonth = (event) => {
+  //   const { value } = event.target;
+  //   setDate(getdate(value));
+  // };
 
   const getOrderFromDate = () => {
     const arr = [];
-    if (tabs[3].active) {
-      for (let i = 1; i <= 12; i++) {
-        let total = 0;
-        for (let j = 0; j < listOrder.length; j++) {
-          const element = listOrder[j];
-          if (element.status === "Đã thanh toán") {
-            if (new Date(element.createAt).getMonth() + 1 === i) {
-              total += element.totalprice;
-            }
-          }
-        }
-        arr.push({
-          date: `Tháng ${i}`,
-          price: total,
-        });
-      }
-    } else {
-      for (let i = 0; i < listOrder.length; i++) {
-        const element = listOrder[i];
-        if (element.status === "Đã thanh toán") {
-          let vt = arr.findIndex(
-            (el) => formatDateSort(el.date) === formatDateSort(element.createAt)
-          );
-          if (vt !== -1) {
-            arr[vt].price += element.totalprice;
-          } else {
-            arr.push({
-              date: formatDateSort(element.createAt),
-              price: element.totalprice,
-            });
-          }
+
+    for (let i = 0; i < listOrder.length; i++) {
+      const element = listOrder[i];
+      if (element.status === "Đã thanh toán") {
+        let vt = arr.findIndex(
+          (el) => formatDateSort(el.date) === formatDateSort(element.createAt)
+        );
+        if (vt !== -1) {
+          arr[vt].price += element.totalprice;
+        } else {
+          arr.push({
+            date: formatDateSort(element.createAt),
+            price: element.totalprice,
+          });
         }
       }
     }
@@ -234,37 +171,6 @@ const StatisticPage = () => {
 
       <Tabs tabs={tabs} setTabs={setTabs} />
 
-      {tabs[1].active && (
-        <div className="form-date">
-          <div className="form-group">
-            <label>Từ</label>
-            <input
-              type="date"
-              onChange={changeDate}
-              name="createAt[gte]"
-              value={date["createAt[gte]"]}
-            />
-          </div>
-          <div className="form-group">
-            <label>Đến</label>
-            <input
-              type="date"
-              onChange={changeDate}
-              name="createAt[lte]"
-              value={date["createAt[lte]"]}
-            />
-          </div>
-        </div>
-      )}
-      {tabs[2].active && (
-        <div className="form-date">
-          <div className="form-group">
-            <label>Tháng</label>
-            <input type="month" onChange={changemonth} />
-          </div>
-        </div>
-      )}
-
       <div className="tabst">
         <Spinners show={loading} />
       </div>
@@ -272,31 +178,8 @@ const StatisticPage = () => {
       {err && <h4>{err}</h4>}
       {show && (
         <>
-          <h4>Tỷ lệ đơn hàng thành công {title}</h4>
+          <h4>Thống kê doanh thu {title}</h4>
 
-          <div className="statistic-to-month">
-            <div className="wrapchart">
-              <PieChart width={300} height={300}>
-                <Pie
-                  data={data}
-                  dataKey="value"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  label
-                >
-                  {data.map((_, index) => (
-                    <Cell key={`cell-${index}`} fill={colors[index]} />
-                  ))}
-                </Pie>
-                <Legend
-                  iconSize={10}
-                  layout="vertical"
-                  verticalAlign="bottom"
-                />
-              </PieChart>
-            </div>
-          </div>
           <h4>Doanh thu theo ngày </h4>
           <div className="statistic-to-month">
             <div className="wrapchart">
@@ -321,18 +204,10 @@ const StatisticPage = () => {
               <strong>{listOrder.length}</strong>
             </div>
             <div className="item">
-              <span>Số đơn hàng thành công:</span>
+              <span>Số đơn hàng đã thanh toán:</span>
               <strong>{getDonThanhCong().dem}</strong>
             </div>
-            <div className="item">
-              <span>Tỉ lệ thành công:</span>
-              <strong>
-                {parseFloat(
-                  (getDonThanhCong().dem / listOrder.length) * 100
-                ).toFixed(2)}{" "}
-                %
-              </strong>
-            </div>
+
             <div className="item">
               <span>Doanh Thu:</span>
               <strong>{formatPrice(getDonThanhCong().doanhthu)}</strong>

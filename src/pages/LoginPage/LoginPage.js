@@ -30,8 +30,16 @@ const LoginPage = () => {
     setLoading(true);
     UserApis.login(values)
       .then((result) => {
-        login(result.data);
-        history.push("/");
+        if (result.data.user.role === "Bán hàng") {
+          login(result.data);
+          history.push("/");
+        } else {
+          NotificationManager.error(
+            "Bạn không có quyền truy cập vào chức năng này",
+            "Thất Bại",
+            1000
+          );
+        }
       })
       .catch((err) => {
         console.log(err);

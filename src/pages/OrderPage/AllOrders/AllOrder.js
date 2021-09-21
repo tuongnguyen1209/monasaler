@@ -11,23 +11,18 @@ import {
 import { WrapAllOrder } from "./AllOrderStyle";
 
 const AllOrder = () => {
-  const [cateShow, setCateShow] = useState(0);
+  const [cateShow, setCateShow] = useState("1");
   const { user } = useContext(UserContext);
-  const [date, setDate] = useState({
-    "createAt[gte]": "",
-    "createAt[lte]": "",
-    limit: "50",
-  });
   const [listOrders, setListOrder] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (
-      date["createAt[gte]"] &&
-      date["createAt[lte]"] &&
-      date["createAt[gte]"] <= date["createAt[lte]"]
-    ) {
+    if (cateShow === "1") {
       setLoading(true);
+      const date = {
+        "createAt[gte]": FormatDate1(new Date()),
+        limit: "50",
+      };
       UserApis.getOrderOfUser(user._id, date)
         .then((result) => {
           console.log(result);
@@ -39,9 +34,9 @@ const AllOrder = () => {
         .finally(() => {
           setLoading(false);
         });
-    } else if (cateShow === "3") {
+    } else if (cateShow === "2") {
       setLoading(true);
-      UserApis.getOrderOfUser(user._id)
+      UserApis.getOrderOfUser(user._id, changemoth())
         .then((result) => {
           console.log(result);
           setListOrder(result.data.orders);
@@ -53,39 +48,29 @@ const AllOrder = () => {
           setLoading(false);
         });
     }
-
+    return () => {
+      setListOrder([]);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date, cateShow]);
+  }, [cateShow]);
 
   const chonceShow = (e) => {
     setCateShow(e.target.value);
-    setDate({
-      "createAt[gte]": "",
-      "createAt[lte]": "",
-      limit: "50",
-    });
   };
 
-  const changeDate = (event) => {
-    const { name, value } = event.target;
-    const newDate = { ...date };
-    newDate[name] = value;
-    setDate(newDate);
-  };
-
-  const changemoth = (event) => {
-    const { value } = event.target;
-    let date = new Date(value),
+  const changemoth = () => {
+    let date = new Date(),
       y = date.getFullYear(),
       m = date.getMonth();
     let firstDay = new Date(y, m, 1);
     let lastDay = new Date(y, m + 1, 0);
-
     const newDate = {
       "createAt[gte]": FormatDate1(firstDay),
       "createAt[lte]": FormatDate1(lastDay),
+      limit: 100,
     };
-    setDate(newDate);
+    console.log(newDate);
+    return newDate;
   };
 
   return (
@@ -94,45 +79,16 @@ const AllOrder = () => {
         <div className="form-group">
           <label>Chọn loại </label>
           <select onChange={chonceShow} value={cateShow}>
-            <option value="0">-----</option>
-            <option value="1">Xem Theo Ngày</option>
-            <option value="2">Xem Theo Tháng</option>
-            <option value="3">Xem Tất Cả Đơn Hàng</option>
+            <option value="1">Xem Ngày hiện tại</option>
+            <option value="2">Xem Tháng hiện tại</option>
           </select>
         </div>
-        {cateShow === "1" && (
-          <>
-            <div className="form-group">
-              <label>Từ: </label>
-              <input
-                type="date"
-                name="createAt[gte]"
-                value={date["createAt[gte]"]}
-                onChange={changeDate}
-              />
-            </div>
-            <div className="form-group">
-              <label>Đến: </label>
-              <input
-                type="date"
-                name="createAt[lte]"
-                value={date["createAt[lte]"]}
-                onChange={changeDate}
-              />
-            </div>
-          </>
-        )}
-        {cateShow === "2" && (
-          <>
-            <div className="form-group">
-              <label>Chọn tháng: </label>
-              <input type="month" onChange={changemoth} />
-            </div>
-          </>
-        )}
       </div>
 
       <Spinners show={loading} />
+      {listOrders.length === 0 && !loading && (
+        <h4>Chưa có đơn hàng nào được tạo</h4>
+      )}
       {listOrders.length > 0 && <h4>Kết quả tìm được</h4>}
       <div className="list-order">
         {listOrders.length > 0 && (
