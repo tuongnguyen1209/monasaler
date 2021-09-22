@@ -24,16 +24,31 @@ const ProductInfo = () => {
 
   useEffect(() => {
     setLoading(true);
-    ProductApis.get(id)
-      .then((result) => {
-        setProduct(result.data.product);
-      })
-      .catch(() => {
-        setErrorId(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (id.length > 15) {
+      ProductApis.get(id)
+        .then((result) => {
+          setProduct(result.data.product);
+        })
+        .catch(() => {
+          setErrorId(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      // console.log("searc cach khac");
+      ProductApis.search(id)
+        .then((result) => {
+          if (result.data.docs.length > 0) setProduct(result.data.docs[0]);
+          else setErrorId(true);
+        })
+        .catch(() => {
+          setErrorId(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }, [id]);
 
   const filterColter = (arr = []) => {

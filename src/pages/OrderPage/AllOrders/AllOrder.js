@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserApis } from "../../../apis/UserApis";
+import Pangination from "../../../compoents/Pangination/Pangination";
 import Spinners from "../../../compoents/Spinners/Spinners";
 import { UserContext } from "../../../contexts/UserContext";
 import {
@@ -15,17 +16,22 @@ const AllOrder = () => {
   const { user } = useContext(UserContext);
   const [listOrders, setListOrder] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pag, setPag] = useState({
+    page: 1,
+    totalPage: 1,
+  });
 
   useEffect(() => {
     if (cateShow === "1") {
       setLoading(true);
       const date = {
         "createAt[gte]": FormatDate1(new Date()),
-        limit: "50",
+        page: pag.page,
       };
       UserApis.getOrderOfUser(user._id, date)
         .then((result) => {
-          console.log(result);
+          const newPag = { ...pag, totalPage: result.data.totalPage };
+          setPag(newPag);
           setListOrder(result.data.orders);
         })
         .catch((err) => {
@@ -38,6 +44,8 @@ const AllOrder = () => {
       setLoading(true);
       UserApis.getOrderOfUser(user._id, changemoth())
         .then((result) => {
+          const newPag = { ...pag, totalPage: result.data.totalPage };
+          setPag(newPag);
           console.log(result);
           setListOrder(result.data.orders);
         })
@@ -52,7 +60,7 @@ const AllOrder = () => {
       setListOrder([]);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cateShow]);
+  }, [cateShow, pag.page]);
 
   const chonceShow = (e) => {
     setCateShow(e.target.value);
@@ -67,9 +75,9 @@ const AllOrder = () => {
     const newDate = {
       "createAt[gte]": FormatDate1(firstDay),
       "createAt[lte]": FormatDate1(lastDay),
-      limit: 100,
+      page: pag.page,
     };
-    console.log(newDate);
+    // console.log(newDate);
     return newDate;
   };
 
@@ -117,6 +125,15 @@ const AllOrder = () => {
               </tbody>
             </table>
             {/* </Accordion> */}
+            <Pangination
+              totalPage={pag.totalPage}
+              currentPage={pag.page}
+              color="red"
+              changePage={(e) => {
+                const newPag = { ...pag, page: e };
+                setPag(newPag);
+              }}
+            />
           </>
         )}
       </div>

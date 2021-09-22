@@ -9,20 +9,15 @@ const ScanPage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (checkData()) {
+    if (data) {
       console.log(data);
-      console.log("chuyen huong", data.split(":"));
-      history.push(`/chi-tiet-san-pham/${data.split(":")[1]}`);
+      console.log("chuyen huong", data);
+      history.push(`/chi-tiet-san-pham/${data}`);
     } else {
       console.log("sai url");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-
-  const checkData = () => {
-    console.log(data && data.indexOf("p:") !== -1);
-    return data && data.indexOf("p:") !== -1;
-  };
 
   return (
     <WrapCamera>

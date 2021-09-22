@@ -14,4 +14,7 @@ export const ProductApis = {
   getTypes: async () => {
     return await axiosClient.get(`${url}/types`);
   },
+  search: (kw) => {
+    return axiosClient.get(`${url}/search/${kw}`);
+  },
 };

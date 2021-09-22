@@ -2,21 +2,24 @@ import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import { CustomerssApis } from "../../apis/CustomerApis";
 import Form from "../../compoents/Form/Form";
+import Pangination from "../../compoents/Pangination/Pangination";
 import Spinners from "../../compoents/Spinners/Spinners";
 import SubHeader from "../../compoents/SubHeader/SubHeader";
 import { WraperListCustomer } from "./ListCustomerStyle";
 
 const ListCustomer = () => {
   const [dataCustomer, setDataCustomer] = useState([]);
-  const query = { limit: 50, page: 1 };
+  const [query, setQuery] = useState({ limit: 10, page: 1 });
   const [dataEdit, setDataEdit] = useState({});
   const [loading, setLoading] = useState(false);
   const [kw, setKw] = useState("");
+  const [totalPage, setTotalPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
     CustomerssApis.getAll(query)
       .then((result) => {
+        setTotalPage(result.data.totalPage);
         const customers = result.data.docs.map((customerData) => {
           return {
             id: customerData.id,
@@ -34,7 +37,7 @@ const ListCustomer = () => {
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query.page]);
 
   const handleGetEdit = (cus) => {
     setDataEdit(cus);
@@ -131,8 +134,20 @@ const ListCustomer = () => {
           <i className="fas fa-search search__icon"></i>
         </button>
       </form>
-
-      <div className="list-customer">{customer}</div>
+      {!loading && (
+        <div className="list-customer">
+          {customer}
+          <Pangination
+            totalPage={totalPage}
+            currentPage={query.page}
+            color="red"
+            changePage={(e) => {
+              const newQuery = { ...query, page: e };
+              setQuery(newQuery);
+            }}
+          />
+        </div>
+      )}
       <Spinners show={loading} />
 
       <Popup
