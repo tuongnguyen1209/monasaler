@@ -112,19 +112,9 @@ const OrderDetail = () => {
         <div className="price-summary">
           <div className="summary">
             <div className="summary__inner">
-              <p className="summary__text">Tạm tính</p>
-              <p className="summary__value">{formatPrice(order.totalprice)}</p>
-            </div>
-            <div className="summary__inner">
-              <p className="summary__text">VAT 10% (nếu có)</p>
-              <p className="summary__value">
-                {formatPrice(order.totalprice * 0.1)}
-              </p>
-            </div>
-            <div className="summary__inner">
               <p className="summary__text summary__total">Thành tiền</p>
               <p className="summary__value summary__total">
-                {formatPrice(order.totalprice * 1.1)}
+                {formatPrice(order.totalprice)}
               </p>
             </div>
           </div>

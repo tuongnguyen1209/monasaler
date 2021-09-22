@@ -128,19 +128,6 @@ const OrderPage = () => {
                       {formatPrice(totalCart())}
                     </strong>
                   </li>
-
-                  <li>
-                    <span>Thuế:</span>
-                    <strong className="price">
-                      {formatPrice(totalCart() * 0.1)}
-                    </strong>
-                  </li>
-                  <li>
-                    <span>Tổng cộng:</span>
-                    <strong className="price">
-                      {formatPrice(totalCart() * 1.1)}
-                    </strong>
-                  </li>
                 </ul>
 
                 <Spinners show={loading} />
