@@ -102,9 +102,12 @@ export const WraperListCustomer = styled.div`
     position: fixed;
     bottom: 15%;
     right: 30px;
+
     button {
       padding: 15px;
       border-radius: 50%;
+      width: 45px;
+      height: 45px;
       border: none;
       background-color: var(--color-primary);
       color: wheat;
