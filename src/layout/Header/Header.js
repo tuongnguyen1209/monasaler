@@ -2,24 +2,27 @@ import React, { useContext } from "react";
 import { WraperHeader } from "./HeaderStyle";
 import avt from "../../assets/img/noAvt.png";
 import { UserContext } from "../../contexts/UserContext";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { user, logout } = useContext(UserContext);
 
   return (
     <WraperHeader>
-      <div className="user">
-        {user && (
-          <>
-            <img
-              src={user.image ? user.image : avt}
-              alt="User avt"
-              className="user__avt"
-            />
-            <span className="user__user-name">Xin Chào, {user.fullname}</span>
-          </>
-        )}
-      </div>
+      <Link to="/trang-ca-nhan">
+        <div className="user">
+          {user && (
+            <>
+              <img
+                src={user.image ? user.image : avt}
+                alt="User avt"
+                className="user__avt"
+              />
+              <span className="user__user-name">Xin Chào, {user.fullname}</span>
+            </>
+          )}
+        </div>
+      </Link>
       <div className="box-center">
         {/* <p className="box-center__text">Mona Paint, xin chào! </p> */}
       </div>

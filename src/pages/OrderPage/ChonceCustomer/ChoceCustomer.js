@@ -19,6 +19,10 @@ const ChoceCustomer = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (kw.phone === "") {
+      setErr("Vui lòng nhập đầy đủ thông tin!!!");
+      return;
+    }
     setLoading(true);
     CustomerssApis.getAll(kw)
       .then((result) => {
@@ -66,6 +70,7 @@ const ChoceCustomer = (props) => {
                 placeholder="Tìm kiếm...."
                 onChange={handleChangeText}
                 value={kw.phone}
+                required
                 disabled={loading}
               />
               <button className="search__button">

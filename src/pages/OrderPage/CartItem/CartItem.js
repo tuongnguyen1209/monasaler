@@ -45,6 +45,7 @@ const CartItem = (props) => {
                 onChange={(e) => {
                   changeSl(e.target.value);
                 }}
+                style={{ minWidth: 30 }}
                 value={el.quantity}
               />
               <button

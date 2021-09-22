@@ -14,6 +14,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { UserContext } from "./contexts/UserContext";
 import OrderDetail from "./pages/OrderPage/OrderDetail/OrderDetail";
 import StatisticPage from "./pages/StatisticPage/StatisticPage";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 const RouterSales = () => {
   const location = useLocation();
@@ -39,6 +40,7 @@ const RouterSales = () => {
         <Route exact path="/chi-tiet-don-hang/:id" component={OrderDetail} />
         <Route exact path="/thong-ke" component={StatisticPage} />
         <Route exact path="/dang-nhap" component={LoginPage} />
+        <Route exact path="/trang-ca-nhan" component={UserProfile} />
         <Route path="*"></Route>
       </Switch>
 

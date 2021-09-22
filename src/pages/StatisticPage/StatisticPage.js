@@ -43,27 +43,27 @@ const StatisticPage = () => {
       date["createAt[gte]"] &&
       date["createAt[lte]"] &&
       date["createAt[gte]"] <= date["createAt[lte]"]
-    )
+    ) {
       setLoading(true);
-    UserApis.getOrderOfUser(user._id, date)
-      .then((result) => {
-        if (result.quantity > 0) {
-          setListOrder(result.data.orders);
-          setShow(true);
-          setErr("");
+      UserApis.getOrderOfUser(user._id, date)
+        .then((result) => {
+          if (result.quantity > 0) {
+            setListOrder(result.data.orders);
+            setShow(true);
+            setErr("");
 
-          if (tabs[0].active) setTitle(`trong tháng ${getmonth() + 1}`);
-        } else {
-          setErr("Không có đơn hàng phù hợp");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-
+            if (tabs[0].active) setTitle(`trong tháng ${getmonth() + 1}`);
+          } else {
+            setErr("Không có đơn hàng phù hợp");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
     return () => {
       setShow(false);
       setErr("");
@@ -194,7 +194,12 @@ const StatisticPage = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="price" stroke="#8884d8" />
+                <Line
+                  type="monotone"
+                  dataKey="price"
+                  name="Doanh thu"
+                  stroke="#8884d8"
+                />
               </LineChart>
             </div>
           </div>

@@ -83,6 +83,7 @@ const UserProvider = ({ children }) => {
     user,
     cart,
     checkLogin,
+    setUser,
     addToCart,
     login,
     logout,
